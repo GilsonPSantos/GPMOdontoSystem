@@ -54,6 +54,16 @@
 	
 </h:head>
 	<h:body>
+		<!-- INICIO DO MODAL DO CADASTRO DE ENDEREÇO DO CLIENTE -->
+		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true">
+				
+				
+				
+				
+		</p:dialog>
+	<!-- FIM DO MODAL DO CADASTRO DE ENDEREÇO DO CLIENTE -->
+	
+	
 		<p:layout fullPage="true" styleClass="cortela">
 		    <p:layoutUnit position="center" styleClass="cortela">
 		  		<p:panel styleClass="ui-g-12 ui-md-10 ui-lg-12 cortela" id="painelMenu"><!-- INICIO PAINEL DO TOPO -->
@@ -106,7 +116,7 @@
 			</p:panel><!-- FIM PAINEL DO TOPO --> 
 				
 				<!-- INICIO PAINEL FORM PACIENTE -->
-			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela" header="Dados do Paciente">
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12" header="Dados do Paciente">
 				<h:form>
 				<div class="ui-g-12 ui-md-12 ui-lg-1"></div>
 				<h:panelGrid columns="5">
@@ -151,7 +161,20 @@
 						</h:panelGrid>
 						
 					</h:panelGrid>
+					<h:panelGrid columns="1">
+					<h:panelGrid columns="1">
+							<p:commandButton value="Endereço" type="button" onclick="PF('modalEnd').show();"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							<p:commandButton value="Agendar Consulta" type="button" onclick="PF('modalConsulta').show();"/>
+					</h:panelGrid>
+					</h:panelGrid>
+					
 				</h:panelGrid>
+				
+				
+				
+				
 				
 				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
 				<h:panelGrid columns="2">
