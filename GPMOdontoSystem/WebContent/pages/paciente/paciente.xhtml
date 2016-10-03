@@ -171,7 +171,7 @@
 				<h:form>
 					<p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}" 
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
-						paginator="true" rows="10" style="margin-bottom:20px" emptyMessage="Não existem consultas agendadas para essa data">
+						paginator="true" rows="10" style="margin-bottom:20px" emptyMessage="O paciente não possui histórico de consultas">
 						<f:facet name="{Exporters}">
 							<h:commandLink>
 								<p:graphicImage value="/img/excel.png" width="24px"/>

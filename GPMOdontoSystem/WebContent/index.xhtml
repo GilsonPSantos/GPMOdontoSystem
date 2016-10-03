@@ -217,25 +217,16 @@
 							</h:panelGrid>
 						</p:panel><!-- FIM PAINEL INPUT PACIENTE DO FORM FILTRO -->
 						
-						
-						
-						
 						</h:form>
 						
 						</p:panel><!-- FIM PAINEL SELECT DO FORM FILTRO -->
-						
-						
-						
-						
 					</p:tab>
 				</p:accordionPanel> <!-- FIM ACCORDION-->
 			</p:panel>
 			<!-- FIM PAINEL ACCORDION FORM FILTRO -->
 			
-			<p:separator></p:separator>
-			
 			<!-- INICIO PAINEL TABELA CONSULTAS DO DIA-->
-			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela">
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12">
 				<h:form>
 					<p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}" 
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
@@ -294,14 +285,12 @@
 							<h:outputText value="#{car.color}" />
 						</p:column>
 					</p:dataTable>
-
 				</h:form>
-					
 			</p:panel>
 			
 		</p:layoutUnit>
 		
-		<p:layoutUnit position="south" footer="&copy; Copyright todos os direitos reservados - Gilson Santos e Mario Glaucon - Sistema de Controle Odontológico" styleClass="cortela"></p:layoutUnit>
+		<p:layoutUnit position="south" footer="&copy; Copyright todos os direitos reservados - Gilson Santos e Mario Glaucon - Sistema de Controle Odontológico" styleClass=""></p:layoutUnit>
 		
 		</p:layout>
 	</h:body>
