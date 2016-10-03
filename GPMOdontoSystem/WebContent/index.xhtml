@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style>
+		.cortela, .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-helper-hidden, body, .ui-layout-unit-content.ui-widget-content{
+			background-color: #FAFCFF !important; 
+		}
+		.ui-widget-content {
+			border: 0px !important;
+		}
+		#j_idt144 > #j_idt69 > #pacienteConsulta_input, #j_idt144 > #j_idt69 > #pacienteConsulta{
+			width: 100% !important;
+		}
+	</style>
+	<script type="text/javascript">
+		
+		PrimeFaces.locales['pt'] = {  
+	            closeText: 'Fechar',  
+	            prevText: 'Anterior',  
+	            nextText: 'Próximo',  
+	            currentText: 'Começo',  
+	            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+	            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],  
+	            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+	            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],  
+	            dayNamesMin: ['D','S','T','Q','Q','S','S'],  
+	            weekHeader: 'Semana',  
+	            firstDay: 1,  
+	            isRTL: false,  
+	            showMonthAfterYear: false,  
+	            yearSuffix: '',  
+	            timeOnlyTitle: 'Só Horas',  
+	            timeText: 'Tempo',  
+	            hourText: 'Hora',  
+	            minuteText: 'Minuto',  
+	            secondText: 'Segundo',  
+	            currentText: 'Data Atual',  
+	            ampm: false,  
+	            month: 'Mês',  
+	            week: 'Semana',  
+	            day: 'Dia',  
+	            allDayText : 'Todo Dia'  
+	        };
+	
+	</script>
+	
+	
+</h:head>
+	<h:body>
+	
+	<!-- INICIO MODAL DO CADASTRO DO CLIENTE -->
+	<p:dialog header="Dados do Paciente" widgetVar="dlg2" modal="true" position="top">
+	
+		<!-- INICIO PAINEL FORM PACIENTE -->
+	<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela">
+		<div class="ui-g-12 ui-md-12 ui-lg-1"></div>
+		<h:form id="formPaciente">
+			<h:panelGrid columns="5">
+				
+					<h:panelGrid columns="1">
+					Nome:
+						<p:inputText value="" title="Nome do Paciente" placeholder="Nome"/>
+						<p/>
+					Email:
+						<p:inputText value="" title="Email do Paciente" type="email" placeholder="Email"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+					CPF:
+						<p:inputText value="" title="CPF do Paciente" type="" placeholder="CPF"/>
+						<p/>
+					Identidade:
+						<p:inputText value="" title="Identidade do Paciente" type="" placeholder="Identidade"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+					Data de Nascimento:
+						<p:calendar id="dataNascimento" title="Data de Nascimento" placeholder="Data de Nascimento"/>
+							<p/>
+					Sexo:
+					        <p:selectOneRadio id="sexo" value="" label="Sexo">
+					            <f:selectItem itemLabel="Masculino" itemValue="m" />
+					            <f:selectItem itemLabel="Feminino" itemValue="f" />
+					        </p:selectOneRadio>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+					
+					Telefone:
+						<h:panelGrid columns="2">
+								<p:inputText value="" title="Digite o DDD" type="text" size="5" maxlength="2" placeholder="DDD"/>
+								<p:inputText value="" title="Digite o Tel" type="" placeholder="Telefone"/>
+						</h:panelGrid>
+					<p/>
+					Celular:
+						<h:panelGrid columns="2">
+								<p:inputText value="" title="Digite o DDD" type="text" size="5" maxlength="2" placeholder="DDD"/>
+								<p:inputText value="" title="Digite o Cel" type="" placeholder="Celular"/>
+						</h:panelGrid>
+						
+					</h:panelGrid>
+			</h:panelGrid>
+			<p:panel style="text-align:center;">
+			<p:button value="Cadastrar" href="pages/paciente/paciente.jsf"/>	
+			
+			<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();"/>
+			</p:panel>
+			</h:form>
+			</p:panel>
+			<!-- FIM PAINEL FORM PACIENTE -->
+	
+	</p:dialog> 
+	<!-- FIM MODAL DO CADASTRO DO CLIENTE -->
+	
+		<p:layout fullPage="true" styleClass="cortela">
+		    <p:layoutUnit position="center" styleClass="cortela">
+		  		<p:panel styleClass="ui-g-12 ui-md-10 ui-lg-12 cortela" ><!-- INICIO PAINEL DO TOPO -->
+					<h:form>  <!-- INICIO MENU -->
+						<p:growl id="messages"/>
+							<p:menubar>
+							    <p:menuitem value="Início" url="index.jsf" icon="ui-icon-home"/>
+							    <p:submenu label="Cadastrar" >
+							       <p:menuitem value="Paciente" onclick="PF('dlg2').show();"/>
+							       <p:menuitem value="Médico" url="#" />
+							       <p:menuitem value="Convênio" url="#" />
+							     </p:submenu>
+							 
+							     <p:submenu label="Pesquisar" >
+							       <p:menuitem value="Agenda" url="#" />
+							       <p:menuitem value="Cliente" url="#"  />
+							     </p:submenu>
+							        
+							     <p:submenu label="Relatórios" >
+							        <p:submenu label="Pacientes">
+							            <p:menuitem value="Todos" url="#"  />
+							            <p:menuitem value="Agendados" url="#"  />
+							            <p:menuitem value="Excluídos" url="#"  />
+							        </p:submenu>
+							            <p:menuitem value="Agenda" url="#"  />
+							            <p:menuitem value="Financeiro" url="#"  />
+							      </p:submenu>
+
+						<f:facet name="options">
+							<p:outputLabel value="Pesquisar Cliente:" for="acForce" />
+							<p:autoComplete id="acForce" forceSelection="true"
+								value="#{autoCompleteView.txt5}"
+								completeMethod="#{autoCompleteView.completeText}"
+								placeholder="Nome, Email ou Cpf" />
+
+							<h:form>
+								<p:growl id="messages" showDetail="true" />
+								<p:outputLabel value="Bem vindo: " for="usuarioLogado"/>
+								<p:menuButton value="Gilson Santos" id="usuarioLogado" >
+									<p:menuitem value="Atualizar Dados" actionListener="#{menuView.update}"
+										update="messages" icon="ui-icon-arrowrefresh-1-w" />
+									<p:separator />
+									<p:menuitem value="Logout" url="#" icon="ui-icon-home"></p:menuitem>
+								</p:menuButton>
+							</h:form>
+
+						</f:facet>
+					</p:menubar>
+				</h:form><!-- FIM MENU -->
+			</p:panel><!-- FIM PAINEL DO TOPO --> 
+			
+			
+			<p:separator></p:separator>
+			
+				<!-- INICIO PAINEL ACCORDION FORM FILTRO -->
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela">
+				<p:accordionPanel activeIndex="1" styleClass="cortela" >
+					<p:tab title="Filtros Agenda" id="corTela" >
+						<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-3 cortela"><!-- INICIO CALENDÁRIO -->
+							<!-- INICIO PAINEL CALENDÁRIO -->
+							 <h:panelGrid columns="1" cellpadding="1">
+							<h:form id="form">
+								<p:outputLabel for="inline:" />
+								<p:calendar locale="pt" id="inline" 
+									value="#{calendarView.date1}" mode="inline" />
+							</h:form>
+							</h:panelGrid>
+						</p:panel> <!-- FIM PAINEL CALENDÁRIO -->
+						<div class="ui-g-12 ui-md-12 ui-lg-1"></div>
+						<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-8 cortela"> <!-- INICIO PAINEL SELECT DO FORM FILTRO -->
+							<h:form>
+								<h:panelGrid styleClass="ui-g-12 ui-md-5 ui-lg-4">
+									<p:outputLabel for="medico" value="Médico:"/>
+									<p:selectOneMenu id="medico" value="" style="width:250px;">
+										<f:selectItem itemLabel="Selecione um Médico" itemValue="" />
+										<f:selectItem itemLabel="Graziela" itemValue="graziela" />
+										<f:selectItem itemLabel="Paula" itemValue="paula" />
+										<f:selectItem itemLabel="Márcia" itemValue="marcia" />
+									</p:selectOneMenu>
+								</h:panelGrid>
+							
+								<h:panelGrid styleClass="ui-g-12 ui-md-5 ui-lg-4">
+								<p:outputLabel for="descricao" value="Descrição:"/>
+									<p:selectOneMenu id="descricao" value="" style="width:250px;" >
+										<f:selectItem itemLabel="Selecione uma Descrição" itemValue="" />
+										<f:selectItem itemLabel="Extração" itemValue="extracao" />
+										<f:selectItem itemLabel="Limpeza" itemValue="limpeza" />
+										<f:selectItem itemLabel="Avaliação" itemValue="avaliacao" />
+									</p:selectOneMenu>
+								</h:panelGrid>
+								<p:panelGrid styleClass="ui-g-12 ui-md-5 ui-lg-4"></p:panelGrid>
+						
+						
+						<p:panel styleClass="ui-g-12 ui-md-7 ui-lg-12"><!-- INICIO PAINEL INPUT PACIENTE DO FORM FILTRO -->
+							<h:panelGrid styleClass="ui-g-12 ui-md-5 ui-lg-7">
+									<p:outputLabel for="pacienteConsulta" value="Paciente:&nbsp;"/>
+									<p:autoComplete id="pacienteConsulta" value="" style="width:100%;" size="57" ></p:autoComplete>								
+							</h:panelGrid>
+						</p:panel><!-- FIM PAINEL INPUT PACIENTE DO FORM FILTRO -->
+						
+						
+						
+						
+						</h:form>
+						
+						</p:panel><!-- FIM PAINEL SELECT DO FORM FILTRO -->
+						
+						
+						
+						
+					</p:tab>
+				</p:accordionPanel> <!-- FIM ACCORDION-->
+			</p:panel>
+			<!-- FIM PAINEL ACCORDION FORM FILTRO -->
+			
+			<p:separator></p:separator>
+			
+			<!-- INICIO PAINEL TABELA CONSULTAS DO DIA-->
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela">
+				<h:form>
+					<p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}" 
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						paginator="true" rows="10" style="margin-bottom:20px" emptyMessage="Não existem consultas agendadas para essa data">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage value="/img/excel.png" width="24px"/>
+								<p:dataExporter type="xls" target="tbl" fileName="cars" />
+							</h:commandLink>
+
+							<h:commandLink>
+								<p:graphicImage value="img/pdf.png" width="24px"/>
+								<p:dataExporter type="pdf" target="tbl" fileName="cars" />
+							</h:commandLink>
+						</f:facet>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Paciente" />
+							</f:facet>
+							<h:outputText value="#{car.id}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Médico" />
+							</f:facet>
+							<h:outputText value="#{car.year}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Horário" />
+							</f:facet>
+							<h:outputText value="#{car.brand}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Descrição" />
+							</f:facet>
+							<h:outputText value="#{car.color}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Situação" />
+							</f:facet>
+							<h:outputText value="#{car.color}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Ação" />
+							</f:facet>
+							<h:outputText value="#{car.color}" />
+						</p:column>
+					</p:dataTable>
+
+				</h:form>
+					
+			</p:panel>
+			
+		</p:layoutUnit>
+		
+		<p:layoutUnit position="south" footer="&copy; Copyright todos os direitos reservados - Gilson Santos e Mario Glaucon - Sistema de Controle Odontológico" styleClass="cortela"></p:layoutUnit>
+		
+		</p:layout>
+	</h:body>
+</html>
