@@ -55,8 +55,70 @@
 </h:head>
 	<h:body>
 		<!-- INICIO DO MODAL DO CADASTRO DE ENDEREÇO DO CLIENTE -->
-		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true">
-				
+		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true" position="top">
+			
+			<!-- INICIO DO FORM DO CADASTRO DE ENDEREÇO DO CLIENTE -->
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12">
+			
+			<div class="ui-g-12 ui-md-12 ui-lg-3"></div>
+			<h:panelGrid columns="12" styleClass="ui-g-12 ui-md-12 ui-lg-6">
+				<h:panelGrid columns="1">
+					<h:panelGrid columns="2">
+						<h:panelGrid columns="1">
+							<p:inputText value="" title="Digite um Cep e clique em Buscar CEP" placeholder="Digite o CEP"/>
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<p:button value="Buscar CEP"/>
+						</h:panelGrid>
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:panelGrid>
+			
+			<h:form id="formPaciente">
+				<h:panelGrid columns="3" >
+					
+					<h:panelGrid columns="1">
+							Logradouro:
+							<p:inputText size="50" value="" title="Logradouro do Paciente" type="text" placeholder="Logradouro"/>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+							N.º:
+							<p:inputText size="7" value="" title="Número" type="number" placeholder="N.º"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							Complemento:
+							<p:inputText size="20" value="" title="Complemento" type="text" placeholder="Email"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				<h:panelGrid columns="4" >
+					<h:panelGrid columns="1">
+							Bairro:
+							<p:inputText size="20" value="" title="Email do Paciente" type="email" placeholder="Email"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							Cidade:
+							<p:inputText size="25" value="" title="Email do Paciente" type="email" placeholder="Email"/>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+							UF:
+							<p:inputText size="7" value="" title="Email do Paciente" type="email" placeholder="Email"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							País:
+							<p:inputText size="20" value="" title="Email do Paciente" type="email" placeholder="Email"/>
+					</h:panelGrid>
+				</h:panelGrid>
+			
+				<p:panel style="text-align:center;">
+					<p:commandButton value="Cadastrar" onclick="PF('modalEnd').hide();"/>	
+					
+					<p:commandButton value="Cancelar" onclick="PF('modalEnd').hide();"/>
+				</p:panel>
+			</h:form>
+			</p:panel>
+			<!-- FIM DO FORM DO CADASTRO DE ENDEREÇO DO CLIENTE -->	
 				
 				
 				
@@ -118,8 +180,8 @@
 				<!-- INICIO PAINEL FORM PACIENTE -->
 			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12" header="Dados do Paciente">
 				<h:form>
-				<div class="ui-g-12 ui-md-12 ui-lg-1"></div>
-				<h:panelGrid columns="5">
+<!-- 				<div class="ui-g-12 ui-md-12 ui-lg-1"></div> -->
+				<h:panelGrid columns="6">
 					
 					<h:panelGrid columns="1">
 					Nome:
@@ -161,15 +223,17 @@
 						</h:panelGrid>
 						
 					</h:panelGrid>
-					<h:panelGrid columns="1">
-					<h:panelGrid columns="1">
-							<p:commandButton value="Endereço" type="button" onclick="PF('modalEnd').show();"/>
+					<div class="ui-g-12 ui-md-12 ui-lg-1"></div>
+					<h:panelGrid columns="1" border="5" style="margin-top:25px;">
+						<h:panelGrid columns="1">
+								<p:commandButton value="Endereço" type="button" onclick="PF('modalEnd').show();"/>
+						</h:panelGrid>
+						
+						<h:panelGrid columns="1">
+						
+								<p:commandButton value="Agendar Consulta" type="button" onclick="PF('modalConsulta').show();"/>
+						</h:panelGrid>
 					</h:panelGrid>
-					<h:panelGrid columns="1">
-							<p:commandButton value="Agendar Consulta" type="button" onclick="PF('modalConsulta').show();"/>
-					</h:panelGrid>
-					</h:panelGrid>
-					
 				</h:panelGrid>
 				
 				
