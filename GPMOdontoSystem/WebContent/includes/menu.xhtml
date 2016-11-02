@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+		  		
+		  		<p:panel styleClass="ui-g-12 ui-md-10 ui-lg-12 cortela" id="painelMenu"><!-- INICIO PAINEL DO TOPO -->
+					<h:form>  <!-- INICIO MENU -->
+						<p:growl id="messages"/>
+							<p:menubar>
+							    <p:menuitem value="Início" url="../../index.jsf" icon="ui-icon-home"/>
+							    <p:submenu label="Cadastrar" >
+							       <p:menuitem value="Paciente" url="/pages/paciente/paciente.jsf"/>
+							       <p:menuitem value="Médico" url="#" />
+							       <p:menuitem value="Convênio" url="/pages/convenio/convenio.jsf" />
+							     </p:submenu>
+							 
+							     <p:submenu label="Pesquisar" >
+							       <p:menuitem value="Agenda" url="#" />
+							       <p:menuitem value="Cliente" url="#"  />
+							     </p:submenu>
+							        
+							     <p:submenu label="Relatórios" >
+							        <p:submenu label="Pacientes">
+							            <p:menuitem value="Todos" url="#"  />
+							            <p:menuitem value="Agendados" url="#"  />
+							            <p:menuitem value="Excluídos" url="#"  />
+							        </p:submenu>
+							            <p:menuitem value="Agenda" url="#"  />
+							            <p:menuitem value="Financeiro" url="#"  />
+							      </p:submenu>
+
+						<f:facet name="options">
+							<p:outputLabel value="Pesquisar Cliente:" for="acForce" />
+							<p:autoComplete id="acForce" forceSelection="true"
+								value="#{autoCompleteView.txt5}"
+								completeMethod="#{autoCompleteView.completeText}"
+								placeholder="Nome, Email ou Cpf" />
+
+							<h:form>
+								<p:growl id="messages" showDetail="true" />
+								<p:outputLabel value="Bem vindo: " for="usuarioLogado"/>
+								<p:menuButton value="Gilson Santos" id="usuarioLogado" >
+									<p:menuitem value="Atualizar Dados" actionListener="#{menuView.update}"
+										update="messages" icon="ui-icon-arrowrefresh-1-w" />
+									<p:separator />
+									<p:menuitem value="Logout" url="#" icon="ui-icon-home"></p:menuitem>
+								</p:menuButton>
+							</h:form>
+
+						</f:facet>
+					</p:menubar>
+				</h:form><!-- FIM MENU -->
+			</p:panel><!-- FIM PAINEL DO TOPO --> 
+</html>
