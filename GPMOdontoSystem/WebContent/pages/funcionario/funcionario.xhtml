@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+<link rel="stylesheet" href="../../includes/css/master.css"></link>
+
+	<script type="text/javascript">
+		
+		PrimeFaces.locales['pt'] = {  
+	            closeText: 'Fechar',  
+	            prevText: 'Anterior',  
+	            nextText: 'Próximo',  
+	            currentText: 'Começo',  
+	            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],  
+	            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],  
+	            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],  
+	            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],  
+	            dayNamesMin: ['D','S','T','Q','Q','S','S'],  
+	            weekHeader: 'Semana',  
+	            firstDay: 1,  
+	            isRTL: false,  
+	            showMonthAfterYear: false,  
+	            yearSuffix: '',  
+	            timeOnlyTitle: 'Só Horas',  
+	            timeText: 'Tempo',  
+	            hourText: 'Hora',  
+	            minuteText: 'Minuto',  
+	            secondText: 'Segundo',  
+	            currentText: 'Data Atual',  
+	            ampm: false,  
+	            month: 'Mês',  
+	            week: 'Semana',  
+	            day: 'Dia',  
+	            allDayText : 'Todo Dia'  
+	        };
+	
+	</script>
+	
+	
+</h:head>
+	<h:body>
+		<!-- INICIO DO MODAL DO CADASTRO DE ENDEREÇO DO FUNCIONÁRIO -->
+		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true" position="top">
+			
+			<!-- INICIO DO FORM DO CADASTRO DE ENDEREÇO DO FUNCIONÁRIO -->
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12">
+			
+			<div class="ui-g-12 ui-md-12 ui-lg-3"></div>
+			<h:panelGrid columns="12" styleClass="ui-g-12 ui-md-12 ui-lg-6">
+				<h:panelGrid columns="1">
+					<h:panelGrid columns="2">
+						<h:panelGrid columns="1">
+							<p:inputText value="" title="Digite um Cep e clique em Buscar CEP" placeholder="Digite o CEP"/>
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<p:button value="Buscar CEP"/>
+						</h:panelGrid>
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:panelGrid>
+			
+			<h:form id="formPaciente">
+				<h:panelGrid columns="3" >
+					
+					<h:panelGrid columns="1">
+							Logradouro:
+							<p:inputText size="50" value="" title="Logradouro do funcionário" type="text" placeholder="Logradouro"/>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+							N.º:
+							<p:inputText size="7" value="" title="Número" type="number" placeholder="N.º"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							Complemento:
+							<p:inputText size="20" value="" title="Didite um complemento" type="text" placeholder="Complemento"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				<h:panelGrid columns="4" >
+					<h:panelGrid columns="1">
+							Bairro:
+							<p:inputText size="20" value="" title="Digite o bairro do funcionário" type="email" placeholder="Bairro"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							Cidade:
+							<p:inputText size="25" value="" title="Digite a cidade do funcionário" type="email" placeholder="Cidade"/>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+							UF:
+							<p:inputText size="7" value="" title="Digite o estado do funcionário" type="email" placeholder="UF"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							País:
+							<p:inputText size="20" value="" title="Digite o país do funcionário" type="email" placeholder="País"/>
+					</h:panelGrid>
+				</h:panelGrid>
+			
+				<p:panel style="text-align:center;">
+					<p:commandButton value="Cadastrar" onclick="PF('modalEnd').hide();"/>	
+					
+					<p:commandButton value="Cancelar" onclick="PF('modalEnd').hide();"/>
+				</p:panel>
+			</h:form>
+			</p:panel>
+			<!-- FIM DO FORM DO CADASTRO DE ENDEREÇO DO FUNCIONÁRIO -->	
+		</p:dialog>
+	<!-- FIM DO MODAL DO CADASTRO DE ENDEREÇO DO FUNCIONÁRIO -->
+	
+		<p:layout fullPage="true" styleClass="cortela">
+		    <p:layoutUnit position="center" styleClass="cortela">
+				
+				<!-- INCLUSÃO DO MENU -->
+				<ui:include src="../../includes/menu.xhtml"></ui:include>
+				
+				<!-- INICIO PAINEL FORM FUNCIONÁRIO -->
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12" header="Dados do Funcionário">
+				<h:form>
+				<h:panelGrid columns="6">
+					
+					<h:panelGrid columns="1">
+					Nome:
+						<p:inputText value="" title="Nome do Paciente" placeholder="Nome"/>
+						<p/>
+					Email:
+						<p:inputText value="" title="Email do Paciente" type="email" placeholder="Email"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+					CPF:
+						<p:inputText value="" title="CPF do Paciente" maxlength="15" size="12" type="" placeholder="CPF"/>
+						<p/>
+					Identidade:
+						<p:inputText value="" title="Identidade do Paciente" size="12" type="" placeholder="Identidade"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+					Data de Nascimento:
+						<p:calendar locale="pt" id="dataNascimento" title="Data de Nascimento" placeholder="Data de Nascimento"/>
+							<p/>
+					Sexo:
+					        <p:selectOneRadio id="sexo" value="" label="Sexo">
+					            <f:selectItem itemLabel="Masculino" itemValue="m" />
+					            <f:selectItem itemLabel="Feminino" itemValue="f" />
+					        </p:selectOneRadio>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+					
+					Telefone:
+						<h:panelGrid columns="2">
+								<p:inputText value="" title="Digite o DDD" type="text" size="3" maxlength="2" placeholder="DDD"/>
+								<p:inputText maxlength="9" size="10" value="" title="Digite o Tel" type="" placeholder="Telefone"/>
+						</h:panelGrid>
+					<p/>
+					Celular:
+						<h:panelGrid columns="2">
+								<p:inputText value="" title="Digite o DDD" type="text" size="3" maxlength="2" placeholder="DDD"/>
+								<p:inputText value="" title="Digite o Cel" type="" size="10" placeholder="Celular"/>
+						</h:panelGrid>
+						
+					</h:panelGrid>
+					<h:panelGrid columns="1" >
+						Cargo:
+						<p:selectOneMenu value="">
+							<f:selectItem itemLabel="Selecione um Cargo" itemValue="" />
+							<f:selectItem itemLabel="Secretaria" itemValue="1" />
+							<f:selectItem itemLabel="Auxiliar" itemValue="2" />
+							<f:selectItem itemLabel="Atendente" itemValue="3" />
+						</p:selectOneMenu>
+						<p/>
+						Senha:
+	        			<p:password id="nonFeedback" value="" />
+					</h:panelGrid>
+					<h:panelGrid columns="1" border="3" >
+							<p:commandButton style="width:200px;" value="Adicionar Endereço" type="button" onclick="PF('modalEnd').show();"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				
+				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
+				<h:panelGrid columns="2">
+					<p:commandButton  value="Salvar" type="button" onclick="PF('dlg2').show();" />
+					<p:commandButton  value="Cancelar" type="button" />
+				</h:panelGrid>
+			</h:form>
+			</p:panel>
+			<!-- FIM PAINEL FORM FUNCIONÁRIOS -->
+			
+			
+			<!-- INICIO PAINEL TABELA LISTA DE FUNCIONÁRIOS-->
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela">
+				<h:form>
+					<p:dataTable id="tbl" var="car" value="#{dataExporterView.cars}" 
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+						paginator="true" rows="10" style="margin-bottom:20px" emptyMessage="Não possui funcionários cadastrados">
+						<f:facet name="{Exporters}">
+							<h:commandLink>
+								<p:graphicImage value="/img/excel.png" width="24px"/>
+								<p:dataExporter type="xls" target="tbl" fileName="cars" />
+							</h:commandLink>
+
+							<h:commandLink>
+								<p:graphicImage value="img/pdf.png" width="24px"/>
+								<p:dataExporter type="pdf" target="tbl" fileName="cars" />
+							</h:commandLink>
+						</f:facet>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Funcionário" />
+							</f:facet>
+							<h:outputText value="#{car.id}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Cargo" />
+							</f:facet>
+							<h:outputText value="#{car.year}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="E-mail" />
+							</f:facet>
+							<h:outputText value="#{car.brand}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Telefone" />
+							</f:facet>
+							<h:outputText value="#{car.color}" />
+						</p:column>
+
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="Ação" />
+							</f:facet>
+							<h:outputText value="#{car.color}" />
+						</p:column>
+					</p:dataTable>
+
+				</h:form>
+					
+			</p:panel>
+			
+		</p:layoutUnit>
+		<p:layoutUnit position="south" footer="&copy; Copyright todos os direitos reservados - Gilson Santos e Mario Glaucon - Sistema de Controle Odontológico" styleClass="cortela"></p:layoutUnit>
+		
+		</p:layout>
+	</h:body>
+</html>
