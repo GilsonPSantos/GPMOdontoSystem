@@ -8,17 +8,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<style>
-		.cortela, .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-helper-hidden, body, .ui-layout-unit-content.ui-widget-content{
-			background-color: #FAFCFF !important; 
-		}
-		.ui-widget-content {
-			border: 0px !important;
-		}
-		#j_idt144 > #j_idt69 > #pacienteConsulta_input, #j_idt144 > #j_idt69 > #pacienteConsulta{
-			width: 100% !important;
-		}
-	</style>
+
+<link rel="stylesheet" href="../../includes/css/master.css"></link>
+
 	<script type="text/javascript">
 		
 		PrimeFaces.locales['pt'] = {  
@@ -55,119 +47,12 @@
 </h:head>
 	<h:body>
 	
-	<!-- INICIO MODAL DO CADASTRO DO CLIENTE -->
-	<p:dialog header="Dados do Paciente" widgetVar="dlg2" modal="true" position="top">
-	
-		<!-- INICIO PAINEL FORM PACIENTE -->
-	<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela">
-		<div class="ui-g-12 ui-md-12 ui-lg-1"></div>
-		<h:form id="formPaciente">
-			<h:panelGrid columns="5">
-				
-					<h:panelGrid columns="1">
-					Nome:
-						<p:inputText value="" title="Nome do Paciente" placeholder="Nome"/>
-						<p/>
-					Email:
-						<p:inputText value="" title="Email do Paciente" type="email" placeholder="Email"/>
-					</h:panelGrid>
-					<h:panelGrid columns="1">
-					CPF:
-						<p:inputText value="" title="CPF do Paciente" type="" placeholder="CPF"/>
-						<p/>
-					Identidade:
-						<p:inputText value="" title="Identidade do Paciente" type="" placeholder="Identidade"/>
-					</h:panelGrid>
-					<h:panelGrid columns="1">
-					Data de Nascimento:
-						<p:calendar id="dataNascimento" title="Data de Nascimento" placeholder="Data de Nascimento"/>
-							<p/>
-					Sexo:
-					        <p:selectOneRadio id="sexo" value="" label="Sexo">
-					            <f:selectItem itemLabel="Masculino" itemValue="m" />
-					            <f:selectItem itemLabel="Feminino" itemValue="f" />
-					        </p:selectOneRadio>
-					</h:panelGrid>
-					
-					<h:panelGrid columns="1">
-					
-					Telefone:
-						<h:panelGrid columns="2">
-								<p:inputText value="" title="Digite o DDD" type="text" size="5" maxlength="2" placeholder="DDD"/>
-								<p:inputText value="" title="Digite o Tel" type="" placeholder="Telefone"/>
-						</h:panelGrid>
-					<p/>
-					Celular:
-						<h:panelGrid columns="2">
-								<p:inputText value="" title="Digite o DDD" type="text" size="5" maxlength="2" placeholder="DDD"/>
-								<p:inputText value="" title="Digite o Cel" type="" placeholder="Celular"/>
-						</h:panelGrid>
-						
-					</h:panelGrid>
-			</h:panelGrid>
-			<p:panel style="text-align:center;">
-			<p:button value="Cadastrar" href="pages/paciente/paciente.jsf"/>	
-			
-			<p:commandButton value="Cancelar" onclick="PF('dlg2').hide();"/>
-			</p:panel>
-			</h:form>
-			</p:panel>
-			<!-- FIM PAINEL FORM PACIENTE -->
-	
-	</p:dialog> 
-	<!-- FIM MODAL DO CADASTRO DO CLIENTE -->
-	
+	<!-- INICIO PAINAL TOTP -->
 		<p:layout fullPage="true" styleClass="cortela">
 		    <p:layoutUnit position="center" styleClass="cortela">
-		  		<p:panel styleClass="ui-g-12 ui-md-10 ui-lg-12 cortela" ><!-- INICIO PAINEL DO TOPO -->
-					<h:form>  <!-- INICIO MENU -->
-						<p:growl id="messages"/>
-							<p:menubar>
-							    <p:menuitem value="Início" url="index.jsf" icon="ui-icon-home"/>
-							    <p:submenu label="Cadastrar" >
-							       <p:menuitem value="Paciente" onclick="PF('dlg2').show();"/>
-							       <p:menuitem value="Médico" url="#" />
-							       <p:menuitem value="Convênio" url="#" />
-							     </p:submenu>
-							 
-							     <p:submenu label="Pesquisar" >
-							       <p:menuitem value="Agenda" url="#" />
-							       <p:menuitem value="Cliente" url="#"  />
-							     </p:submenu>
-							        
-							     <p:submenu label="Relatórios" >
-							        <p:submenu label="Pacientes">
-							            <p:menuitem value="Todos" url="#"  />
-							            <p:menuitem value="Agendados" url="#"  />
-							            <p:menuitem value="Excluídos" url="#"  />
-							        </p:submenu>
-							            <p:menuitem value="Agenda" url="#"  />
-							            <p:menuitem value="Financeiro" url="#"  />
-							      </p:submenu>
-
-						<f:facet name="options">
-							<p:outputLabel value="Pesquisar Cliente:" for="acForce" />
-							<p:autoComplete id="acForce" forceSelection="true"
-								value="#{autoCompleteView.txt5}"
-								completeMethod="#{autoCompleteView.completeText}"
-								placeholder="Nome, Email ou Cpf" />
-
-							<h:form>
-								<p:growl id="messages" showDetail="true" />
-								<p:outputLabel value="Bem vindo: " for="usuarioLogado"/>
-								<p:menuButton value="Gilson Santos" id="usuarioLogado" >
-									<p:menuitem value="Atualizar Dados" actionListener="#{menuView.update}"
-										update="messages" icon="ui-icon-arrowrefresh-1-w" />
-									<p:separator />
-									<p:menuitem value="Logout" url="#" icon="ui-icon-home"></p:menuitem>
-								</p:menuButton>
-							</h:form>
-
-						</f:facet>
-					</p:menubar>
-				</h:form><!-- FIM MENU -->
-			</p:panel><!-- FIM PAINEL DO TOPO --> 
-			
+				
+				<!-- INCLUSÃO DO MENU -->
+				<ui:include src="includes/menu.xhtml"></ui:include>
 			
 			<p:separator></p:separator>
 			

@@ -8,17 +8,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<style>
-		.cortela, .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-helper-hidden, body, .ui-layout-unit-content.ui-widget-content{
-			background-color: #FAFCFF !important; 
-		}
-		#painelMenu {
-			border: 0px !important;	
-		}
-		#j_idt144 > #j_idt69 > #pacienteConsulta_input, #j_idt144 > #j_idt69 > #pacienteConsulta{
-			width: 100% !important;
-		}
-	</style>
+
+<link rel="stylesheet" href="../../includes/css/master.css"></link>
+
 	<script type="text/javascript">
 		
 		PrimeFaces.locales['pt'] = {  
@@ -119,63 +111,75 @@
 			</h:form>
 			</p:panel>
 			<!-- FIM DO FORM DO CADASTRO DE ENDEREÇO DO CLIENTE -->	
-				
-				
-				
 		</p:dialog>
 	<!-- FIM DO MODAL DO CADASTRO DE ENDEREÇO DO CLIENTE -->
 	
+	<!-- INICIO DO MODAL CADASTRO DE CONVENIO DO PACIENTE -->
+		<p:dialog header="Cadastro de Convênio" widgetVar="modalConvenio" modal="true" position="center">
+			
+			<!-- INICIO DO FORM DO CADASTRO DE CONVENIO DO PACIENTE -->
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12">
+			
+			<h:form id="formConvenio">
+				<h:panelGrid columns="3" >
+					<h:panelGrid columns="1">
+							<p:outputLabel for="planoDeSaudo" value="Nome do Plano:"/>
+							<p:selectOneMenu id="planoDeSaudo" value=""  >
+								<f:selectItem itemLabel="Selecione um Plano" itemValue="" />
+								<f:selectItem itemLabel="Amil" itemValue="extracao" />
+								<f:selectItem itemLabel="Unimed" itemValue="limpeza" />
+								<f:selectItem itemLabel="Bradesco" itemValue="avaliacao" />
+							</p:selectOneMenu>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							N.º do Convênio:
+							<p:inputText size="15" value="" title="Número do Convênio" type="number" placeholder="Número"/>
+					</h:panelGrid>
+					
+					<h:panelGrid columns="1">
+							Natureza:
+							<p:inputText size="25" value="" title="Natureza do Convênio" type="text" placeholder="Natureza"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				<h:panelGrid columns="3">
+					<h:panelGrid columns="1">
+							Acomodação:
+							<p:inputText size="20" value="" title="Acomodação do Convênio" type="text" placeholder="Acomodação"/>
+					</h:panelGrid>
+				
+					<h:panelGrid columns="1">
+							Data de Vencimento:
+						<p:calendar locale="pt" id="dataVencimento" title="Data de Vencimento do Convêncio" placeholder="Data de Vencimento"/>
+					</h:panelGrid>
+					<h:panelGrid columns="1">
+							Cobertura:
+							<p:inputText size="25" value="" title="Cobertura do Convênnio (ex: nacional)" type="text" placeholder="Cobertura"/>
+					</h:panelGrid>
+				</h:panelGrid>
+				<h:panelGrid columns="3">
+				
+					<h:panelGrid columns="1">
+						Observação:
+						<p:inputTextarea title="Digite uma observação sobre o convênio" rows="6" cols="75"/>
+					</h:panelGrid>
+					
+			</h:panelGrid>
+				<p:panel style="text-align:center;">
+					<p:commandButton value="Cadastrar" onclick="PF('modalConvenio').hide();"/>	
+					
+					<p:commandButton value="Cancelar" onclick="PF('modalConvenio').hide();"/>
+				</p:panel>
+			</h:form>
+			</p:panel>
+			<!-- FIM DO FORM DO CADASTRO DE CONVENIO DO PACIENTE -->	
+		</p:dialog>
+	<!-- FIM DO MODAL DO CADASTRO DE CONVENIO DO PACIENTE-->
 	
 		<p:layout fullPage="true" styleClass="cortela">
 		    <p:layoutUnit position="center" styleClass="cortela">
-		  		<p:panel styleClass="ui-g-12 ui-md-10 ui-lg-12 cortela" id="painelMenu"><!-- INICIO PAINEL DO TOPO -->
-					<h:form>  <!-- INICIO MENU -->
-						<p:growl id="messages"/>
-							<p:menubar>
-							    <p:menuitem value="Início" url="../../index.jsf" icon="ui-icon-home"/>
-							    <p:submenu label="Cadastrar" >
-							       <p:menuitem value="Paciente" url="/pages/paciente/paciente.jsf"/>
-							       <p:menuitem value="Médico" url="#" />
-							       <p:menuitem value="Convênio" url="#" />
-							     </p:submenu>
-							 
-							     <p:submenu label="Pesquisar" >
-							       <p:menuitem value="Agenda" url="#" />
-							       <p:menuitem value="Cliente" url="#"  />
-							     </p:submenu>
-							        
-							     <p:submenu label="Relatórios" >
-							        <p:submenu label="Pacientes">
-							            <p:menuitem value="Todos" url="#"  />
-							            <p:menuitem value="Agendados" url="#"  />
-							            <p:menuitem value="Excluídos" url="#"  />
-							        </p:submenu>
-							            <p:menuitem value="Agenda" url="#"  />
-							            <p:menuitem value="Financeiro" url="#"  />
-							      </p:submenu>
-
-						<f:facet name="options">
-							<p:outputLabel value="Pesquisar Cliente:" for="acForce" />
-							<p:autoComplete id="acForce" forceSelection="true"
-								value="#{autoCompleteView.txt5}"
-								completeMethod="#{autoCompleteView.completeText}"
-								placeholder="Nome, Email ou Cpf" />
-
-							<h:form>
-								<p:growl id="messages" showDetail="true" />
-								<p:outputLabel value="Bem vindo: " for="usuarioLogado"/>
-								<p:menuButton value="Gilson Santos" id="usuarioLogado" >
-									<p:menuitem value="Atualizar Dados" actionListener="#{menuView.update}"
-										update="messages" icon="ui-icon-arrowrefresh-1-w" />
-									<p:separator />
-									<p:menuitem value="Logout" url="#" icon="ui-icon-home"></p:menuitem>
-								</p:menuButton>
-							</h:form>
-
-						</f:facet>
-					</p:menubar>
-				</h:form><!-- FIM MENU -->
-			</p:panel><!-- FIM PAINEL DO TOPO --> 
+				
+				<!-- INCLUSÃO DO MENU -->
+				<ui:include src="../../includes/menu.xhtml"></ui:include>
 				
 				<!-- INICIO PAINEL FORM PACIENTE -->
 			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12" header="Dados do Paciente">
@@ -199,7 +203,7 @@
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 					Data de Nascimento:
-						<p:calendar id="dataNascimento" title="Data de Nascimento" placeholder="Data de Nascimento"/>
+						<p:calendar locale="pt" id="dataNascimento" title="Data de Nascimento" placeholder="Data de Nascimento"/>
 							<p/>
 					Sexo:
 					        <p:selectOneRadio id="sexo" value="" label="Sexo">
@@ -224,14 +228,15 @@
 						
 					</h:panelGrid>
 					<div class="ui-g-12 ui-md-12 ui-lg-1"></div>
-					<h:panelGrid columns="1" border="5" style="margin-top:25px;">
+					<h:panelGrid columns="1" border="3" style="margin-top:25px;">
 						<h:panelGrid columns="1">
-								<p:commandButton value="Endereço" type="button" onclick="PF('modalEnd').show();"/>
+							<p:commandButton style="width:200px;" value="Adicionar Endereço" type="button" onclick="PF('modalEnd').show();"/>
 						</h:panelGrid>
-						
 						<h:panelGrid columns="1">
-						
-								<p:commandButton value="Agendar Consulta" type="button" onclick="PF('modalConsulta').show();"/>
+							<p:commandButton style="width:200px;" value="Agendar Consulta" type="button" onclick="PF('modalConsulta').show();"/>
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							<p:commandButton style="width:200px;" value="Adicionar Convênio" type="button" onclick="PF('modalConvenio').show();"/>
 						</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGrid>
