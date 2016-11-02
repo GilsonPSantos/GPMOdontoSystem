@@ -76,30 +76,30 @@
 					
 					<h:panelGrid columns="1">
 							N.º:
-							<p:inputText size="7" value="" title="Número" type="number" placeholder="N.º"/>
+							<p:inputText size="7" value="" title="Digite o número do paciente" type="number" placeholder="N.º"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							Complemento:
-							<p:inputText size="20" value="" title="Complemento" type="text" placeholder="Email"/>
+							<p:inputText size="20" value="" title="Digite o complemento" type="text" placeholder="Complemento"/>
 					</h:panelGrid>
 				</h:panelGrid>
 				<h:panelGrid columns="4" >
 					<h:panelGrid columns="1">
 							Bairro:
-							<p:inputText size="20" value="" title="Email do Paciente" type="email" placeholder="Email"/>
+							<p:inputText size="20" value="" title="Digite o bairro do Paciente" type="text" placeholder="Bairro"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							Cidade:
-							<p:inputText size="25" value="" title="Email do Paciente" type="email" placeholder="Email"/>
+							<p:inputText size="25" value="" title="Digite a cidade do Paciente" type="text" placeholder="Cidade"/>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1">
 							UF:
-							<p:inputText size="7" value="" title="Email do Paciente" type="email" placeholder="Email"/>
+							<p:inputText size="7" value="" title="Digite o estado do Paciente" type="email" placeholder="UF"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							País:
-							<p:inputText size="20" value="" title="Email do Paciente" type="email" placeholder="Email"/>
+							<p:inputText size="20" value="" title="Digite o país do Paciente" type="email" placeholder="País"/>
 					</h:panelGrid>
 				</h:panelGrid>
 			
@@ -157,16 +157,13 @@
 					</h:panelGrid>
 				</h:panelGrid>
 				<h:panelGrid columns="3">
-				
 					<h:panelGrid columns="1">
 						Observação:
-						<p:inputTextarea title="Digite uma observação sobre o convênio" rows="6" cols="75"/>
+						<p:inputTextarea maxlength="200" title="Digite uma observação sobre o convênio" rows="6" cols="75"/>
 					</h:panelGrid>
-					
-			</h:panelGrid>
+				</h:panelGrid>
 				<p:panel style="text-align:center;">
 					<p:commandButton value="Cadastrar" onclick="PF('modalConvenio').hide();"/>	
-					
 					<p:commandButton value="Cancelar" onclick="PF('modalConvenio').hide();"/>
 				</p:panel>
 			</h:form>
@@ -241,21 +238,14 @@
 					</h:panelGrid>
 				</h:panelGrid>
 				
-				
-				
-				
-				
 				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
 				<h:panelGrid columns="2">
-				
-				<p:commandButton  value="Salvar" type="button" onclick="PF('dlg2').show();" />
-				<p:commandButton  value="Cancelar" type="button" />
+					<p:commandButton  value="Salvar" type="button" onclick="PF('dlg2').show();" />
+					<p:commandButton  value="Cancelar" type="button" />
 				</h:panelGrid>
 			</h:form>
 			</p:panel>
 			<!-- FIM PAINEL FORM PACIENTE -->
-			
-			
 			
 			
 			<!-- INICIO PAINEL TABELA DO HISTÓRICO DE CONSULTAS DO PACIENTE-->
@@ -317,7 +307,6 @@
 			</p:panel>
 			
 		</p:layoutUnit>
-		
 		<p:layoutUnit position="south" footer="&copy; Copyright todos os direitos reservados - Gilson Santos e Mario Glaucon - Sistema de Controle Odontológico" styleClass="cortela"></p:layoutUnit>
 		
 		</p:layout>
