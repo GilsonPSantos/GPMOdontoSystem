@@ -1,0 +1,9 @@
+.cortela, .ui-accordion-content.ui-helper-reset.ui-widget-content.ui-helper-hidden, body, .ui-layout-unit-content.ui-widget-content{
+			background-color: #FAFCFF !important; 
+		}
+		#painelMenu {
+			border: 0px !important;	
+		}
+		#j_idt144 > #j_idt69 > #pacienteConsulta_input, #j_idt144 > #j_idt69 > #pacienteConsulta{
+			width: 100% !important;
+		}
