@@ -11,8 +11,8 @@
 							    <p:menuitem value="Início" url="../../index.jsf" icon="ui-icon-home"/>
 							    <p:submenu label="Cadastrar" >
 							       <p:menuitem value="Paciente" url="/pages/paciente/paciente.jsf"/>
-							       <p:menuitem value="Médico" url="#" />
-							       <p:menuitem value="Convênio" url="/pages/convenio/convenio.jsf" />
+							       <p:menuitem value="Médico" url="/pages/funcionario/medico.jsf" />
+							       <p:menuitem value="Funcionário" url="/pages/funcionario/funcionario.jsf" />
 							     </p:submenu>
 							 
 							     <p:submenu label="Pesquisar" >
@@ -31,7 +31,7 @@
 							      </p:submenu>
 
 						<f:facet name="options">
-							<p:outputLabel value="Pesquisar Cliente:" for="acForce" />
+							<p:outputLabel value="Pesquisar Paciente:" for="acForce" />
 							<p:autoComplete id="acForce" forceSelection="true"
 								value="#{autoCompleteView.txt5}"
 								completeMethod="#{autoCompleteView.completeText}"
