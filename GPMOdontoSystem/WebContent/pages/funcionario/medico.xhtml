@@ -44,6 +44,80 @@
 	
 </h:head>
 	<h:body>
+	
+	<!-- INICIO DO MODAL DO CADASTRO DE AGENDA-->
+		<p:dialog header="Cadastro de Agenda" widgetVar="modalAgenda" modal="true" position="center">
+			
+			<!-- INICIO DO FORM DO CADASTRO DE AGENDA -->
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12">
+			<h:form id="formAgenda">
+					<h:panelGrid columns="2" >
+						<h:panelGrid columns="1">
+							Periodo Padrão:
+							<p:selectOneMenu value="">
+								<f:selectItem itemLabel="Mensal" itemValue="1" />
+								<f:selectItem itemLabel="Semanal" itemValue="2" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+						<h:panelGrid columns="1">
+							Intevalo de Consultas:
+							<p:selectOneMenu value="">
+								<f:selectItem itemLabel="30 minutos" itemValue="1" />
+								<f:selectItem itemLabel="1 hora" itemValue="2" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</h:panelGrid>
+			
+			<h:panelGrid>
+				<p:dataTable id="tbl" var="" value="" 
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+						paginator="true" rows="10" style="margin-bottom:20px">
+
+						<p:column headerText="">
+							<h:outputText value="8:00" />
+						</p:column>
+						<p:column headerText="Segunda" style="text-align:center;">
+							<p:selectBooleanCheckbox value="" />
+						</p:column>
+
+						<p:column headerText="Terça" style="text-align:center;">
+							<p:selectBooleanCheckbox value="" />
+						</p:column>
+
+						<p:column headerText="Quarta" style="text-align:center;">
+							<p:selectBooleanCheckbox value="" />
+						</p:column>
+
+						<p:column headerText="Quinta" style="text-align:center;">
+							<p:selectBooleanCheckbox value="" />
+						</p:column>
+
+						<p:column headerText="Sexta" style="text-align:center;">
+							<p:selectBooleanCheckbox value="" />
+						</p:column>
+						
+						<p:column headerText="Sabado" style="text-align:center;">
+							<p:selectBooleanCheckbox value=""  />
+						</p:column>
+						
+						<p:column headerText="Domingo" style="text-align:center;">
+							<p:selectBooleanCheckbox value="" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>	
+					
+				<p:panel style="text-align:center;">
+					<p:commandButton value="Cadastrar" onclick="PF('modalAgenda').hide();"/>	
+					
+					<p:commandButton value="Cancelar" onclick="PF('modalAgenda').hide();"/>
+				</p:panel>
+			</h:form>
+			</p:panel>
+			<!-- FIM DO FORM DO CADASTRO DE AGENDA -->	
+		</p:dialog>
+	<!-- FIM DO MODAL DO CADASTRO DE AGENDA -->
+	
+	
 		<!-- INICIO DO MODAL DO CADASTRO DE MÉDICOS -->
 		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true" position="top">
 			
@@ -111,6 +185,10 @@
 		</p:dialog>
 	<!-- FIM DO MODAL DO CADASTRO DO ENDEREÇO DO MÉDICOS -->
 	
+		
+	
+	
+	
 		<p:layout fullPage="true" styleClass="cortela">
 		    <p:layoutUnit position="center" styleClass="cortela">
 				
@@ -176,6 +254,7 @@
 					</h:panelGrid>
 					<h:panelGrid columns="1" border="3" >
 							<p:commandButton style="width:200px;" value="Adicionar Endereço" type="button" onclick="PF('modalEnd').show();"/>
+							<p:commandButton style="width:200px;" value="Cadastrar Agenda" type="button" onclick="PF('modalAgenda').show();"/>
 					</h:panelGrid>
 				</h:panelGrid>
 				
