@@ -7,25 +7,25 @@ import br.com.gpmodontosystem.model.Endereco;
 public class EnderecoDaoImp implements IEnderecoDao {
 
 	@Override
-	public void inserir() throws Exception {
+	public void inserir(Endereco e) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void consultarPeloId() throws Exception {
+	public void consultarPeloId(Endereco e) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void alterar() throws Exception {
+	public void alterar(Endereco e) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deletar() throws Exception {
+	public void deletar(Endereco e) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -35,5 +35,6 @@ public class EnderecoDaoImp implements IEnderecoDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

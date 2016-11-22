@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 
 public class Dao implements IDao {
 	
-	Connection con;
-	PreparedStatement stmt;
-	ResultSet rs;
+	protected Connection con;
+	protected PreparedStatement stmt;
+	protected ResultSet rs;
 	
 	@Override
 	public void opne() throws Exception{
