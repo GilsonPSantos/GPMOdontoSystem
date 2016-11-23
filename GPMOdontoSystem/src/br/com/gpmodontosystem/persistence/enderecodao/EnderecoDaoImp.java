@@ -13,9 +13,9 @@ public class EnderecoDaoImp implements IEnderecoDao {
 	}
 
 	@Override
-	public void consultarPeloId(Endereco e) throws Exception {
+	public Endereco consultarPeloId(Endereco e) throws Exception {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 	@Override

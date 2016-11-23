@@ -8,7 +8,7 @@ public interface ICrudDao<Classe> {
 	
 	public void inserir(Classe c) throws Exception;
 	
-	public void consultarPeloId(Classe c) throws Exception;
+	public Classe consultarPeloId(Classe c) throws Exception;
 	
 	public void alterar(Classe c) throws Exception;
 	

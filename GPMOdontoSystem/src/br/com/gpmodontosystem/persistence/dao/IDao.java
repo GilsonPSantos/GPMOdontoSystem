@@ -6,7 +6,7 @@ public interface IDao {
 	 * @throws Exception
 	 * Método para abrir uma conexão com o banco de dados
 	 */
-	public void opne() throws Exception;
+	public void open() throws Exception;
 	
 	/***
 	 * @throws Exception

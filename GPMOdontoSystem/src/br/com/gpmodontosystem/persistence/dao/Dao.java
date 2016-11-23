@@ -12,9 +12,9 @@ public class Dao implements IDao {
 	protected ResultSet rs;
 	
 	@Override
-	public void opne() throws Exception{
+	public void open() throws Exception{
 		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql//localhost:3306/BDGPMODONTOSYSTEM", "root", "");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BDODONTOSYSTEM", "root", "");
 	}
 	
 	@Override
