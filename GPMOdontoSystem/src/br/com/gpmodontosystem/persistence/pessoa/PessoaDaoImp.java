@@ -6,6 +6,7 @@ import java.util.Calendar;
 
 import br.com.gpmodontosystem.model.Pessoa;
 import br.com.gpmodontosystem.persistence.dao.Dao;
+import br.com.gpmodontosystem.type.TypeSexo;
 
 public class PessoaDaoImp extends Dao implements IPessoaDao {
 	
@@ -15,21 +16,26 @@ public class PessoaDaoImp extends Dao implements IPessoaDao {
 	public void inserir(Pessoa p) throws Exception {
 		open();
 			StringBuilder sql = new StringBuilder();
-			sql.append("INSERT INTO PESSOA (PES_CPF, PES_IDENTIDADE, PES_NOME, PES_NASCIMENTO, PES_SEXO, PES_EMAIL, )");
-			sql.append("PES_DDD, PES_CEL, PES_TEL) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			sql.append("INSERT INTO PESSOA (PES_CODIGO,PES_CPF, PES_IDENTIDADE, PES_NOME, PES_NASCIMENTO, PES_SEXO, PES_EMAIL,");
+			sql.append("PES_DDD, PES_CEL, PES_TEL) VALUES (4,?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			stmt = con.prepareStatement(sql.toString(), Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, p.getCpf());
 			stmt.setString(2, p.getIdentidade());
 			stmt.setString(3, p.getNomePessoa());
 			dataSql = new Date(p.getDataNascimento().getTime().getTime());
 			stmt.setDate(4, dataSql);
-			stmt.setString(5, p.getSexo());
+			stmt.setString(5, p.getSexo().toString());
 			stmt.setString(6, p.getEmail());
 			stmt.setString(7, p.getDdd());
 			stmt.setString(8, p.getCelular());
 			stmt.setString(9, p.getTelefone());
-			rs = stmt.executeQuery();
-			p.setIdPessoa(rs.getInt(1));
+			stmt.execute();
+			rs = stmt.getGeneratedKeys();
+			if(rs.next()){
+				
+				p.setIdPessoa(rs.getInt(1));
+			}
+//			rs = stmt.getGeneratedKeys();
 			stmt.close();
 		close();
 	}
@@ -54,7 +60,7 @@ public class PessoaDaoImp extends Dao implements IPessoaDao {
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("PES_NASCIMENTO"));
 				pessoa.setDataNascimento(data);
-				pessoa.setSexo(rs.getString("PES_SEXO"));
+				pessoa.setSexo(TypeSexo.valueOf("PES_SEXO"));
 				pessoa.setEmail(rs.getString("PES_EMAIL"));
 				pessoa.setDdd(rs.getString("PES_DDD"));
 				pessoa.setCelular(rs.getString("PES_CEL"));
@@ -78,7 +84,7 @@ public class PessoaDaoImp extends Dao implements IPessoaDao {
 		stmt.setString(3, p.getNomePessoa());
 		dataSql = new Date(p.getDataNascimento().getTime().getTime());
 		stmt.setDate(4, dataSql);
-		stmt.setString(5, p.getSexo());
+		stmt.setString(5, p.getSexo().getSexo());
 		stmt.setString(6, p.getEmail());
 		stmt.setString(7, p.getDdd());
 		stmt.setString(8, p.getCelular());
@@ -101,4 +107,21 @@ public class PessoaDaoImp extends Dao implements IPessoaDao {
 		close();
 	}
 
+	public static void main(String[] args) {
+		Calendar c = Calendar.getInstance();
+		Pessoa p = new Pessoa(null,"01001001000","123","Gilson",c,c,
+				c,TypeSexo.M,"gism@gmail.com","21","12345","4321");
+		try {
+			IPessoaDao pd = new PessoaDaoImp();
+			pd.inserir(p);
+			System.out.println("dados gravados...");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }

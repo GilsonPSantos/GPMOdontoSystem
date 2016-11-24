@@ -2,6 +2,8 @@ package br.com.gpmodontosystem.model;
 
 import java.util.Calendar;
 
+import br.com.gpmodontosystem.type.TypeSexo;
+
 public class Pessoa {
 	
 	private Integer idPessoa;
@@ -11,7 +13,7 @@ public class Pessoa {
 	private Calendar dataNascimento;
 	private Calendar dataCadastro;
 	private Calendar dataAtualizacao;
-	private String sexo;
+	private TypeSexo sexo;
 	private String email;
 	private String ddd;
 	private String celular;
@@ -36,7 +38,7 @@ public class Pessoa {
 	 * @param telefone
 	 */
 	public Pessoa(Integer idPessoa, String cpf, String identidade, String nomePessoa, Calendar dataNascimento,
-			Calendar dataCadastro, Calendar dataAtualizacao, String sexo, String email, String ddd, String celular,
+			Calendar dataCadastro, Calendar dataAtualizacao, TypeSexo sexo, String email, String ddd, String celular,
 			String telefone) {
 		super();
 		this.idPessoa = idPessoa;
@@ -52,6 +54,7 @@ public class Pessoa {
 		this.celular = celular;
 		this.telefone = telefone;
 	}
+
 
 	@Override
 	public String toString() {
@@ -101,11 +104,11 @@ public class Pessoa {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getSexo() {
+	public TypeSexo getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(String sexo) {
+	public void setSexo(TypeSexo sexo) {
 		this.sexo = sexo;
 	}
 
