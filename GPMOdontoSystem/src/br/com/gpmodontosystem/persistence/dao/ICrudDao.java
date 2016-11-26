@@ -2,7 +2,7 @@ package br.com.gpmodontosystem.persistence.dao;
 
 /***
  * @author gilson
- * Inteface com o CRUD básico, que deverá ser implementado por todas as classes DAO.
+ * Inteface com o CRUD bï¿½sico, que deverï¿½ ser implementado por todas as classes DAO.
  */
 public interface ICrudDao<Classe> {
 	
