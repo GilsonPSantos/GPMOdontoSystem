@@ -13,6 +13,8 @@ import javax.faces.context.FacesContext;
 import br.com.gpmodontosystem.model.Paciente;
 import br.com.gpmodontosystem.persistence.pacientedao.IPacienteDao;
 import br.com.gpmodontosystem.persistence.pacientedao.PacienteDaoImp;
+import br.com.gpmodontosystem.service.paciente.IPacienteService;
+import br.com.gpmodontosystem.service.paciente.PacienteServiceImp;
 import br.com.gpmodontosystem.type.TypeSexo;
 
 @ManagedBean(name="mbPaciente")
@@ -23,7 +25,7 @@ public class PacienteBean implements Serializable {
 	private Paciente paciente;
 	private List<Paciente> listaPaciente;
 	
-	private IPacienteDao pacienteDao;
+	private IPacienteService pacienteService;
 	
 	private TypeSexo tipoSexo;
 	
@@ -31,7 +33,7 @@ public class PacienteBean implements Serializable {
 	public void init(){
 		paciente = new Paciente();
 		listaPaciente = new ArrayList<Paciente>();
-		pacienteDao = new PacienteDaoImp();
+		pacienteService = new PacienteServiceImp();
 		
 		//dados fack para testes.
 		paciente.setNomePessoa("Gilson Santos");
@@ -44,7 +46,7 @@ public class PacienteBean implements Serializable {
 	public void cadastrar(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
-			pacienteDao.inserir(paciente);
+			pacienteService.inserir(paciente);
 			fc.addMessage("formCadConsPaciente", new FacesMessage("Paciente gravado com sucesso."));
 		} catch (Exception e) {
 			fc.addMessage("formCadConsPaciente", new FacesMessage("Ocorreu um erro interno ao salvar o Paciente."));
@@ -56,7 +58,7 @@ public class PacienteBean implements Serializable {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		
 		try {
-			paciente = pacienteDao.consultarPeloId(paciente);
+			paciente = pacienteService.consultarPeloId(paciente);
 		} catch (Exception e) {
 			fc.addMessage("formCadConsPaciente", new FacesMessage("Ocorreu um erro interno ao consultar o Paciente."));
 			e.printStackTrace();
@@ -93,14 +95,6 @@ public class PacienteBean implements Serializable {
 
 	public void setListaPaciente(List<Paciente> listaPaciente) {
 		this.listaPaciente = listaPaciente;
-	}
-
-	public IPacienteDao getPacienteDao() {
-		return pacienteDao;
-	}
-
-	public void setPacienteDao(IPacienteDao pacienteDao) {
-		this.pacienteDao = pacienteDao;
 	}
 
 	public static long getSerialversionuid() {
