@@ -47,7 +47,7 @@
 </h:head>
 	<h:body>
 		<!-- INICIO DO MODAL DO CADASTRO DE ENDEREÇO DO CLIENTE -->
-		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true" position="top">
+		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true" position="center">
 			
 			<!-- INICIO DO FORM DO CADASTRO DE ENDEREÇO DO CLIENTE -->
 			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12">
@@ -180,32 +180,32 @@
 				
 				<!-- INICIO PAINEL FORM PACIENTE -->
 			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12" header="Dados do Paciente">
-				<h:form>
+				<h:form id="formCadConsPaciente">
 <!-- 				<div class="ui-g-12 ui-md-12 ui-lg-1"></div> -->
 				<h:panelGrid columns="6">
 					
 					<h:panelGrid columns="1">
 					Nome:
-						<p:inputText value="" title="Nome do Paciente" placeholder="Nome"/>
+						<p:inputText value="#{mbPaciente.paciente.nomePessoa}" title="Nome do Paciente" placeholder="Nome"/>
 						<p/>
 					Email:
-						<p:inputText value="" title="Email do Paciente" type="email" placeholder="Email"/>
+						<p:inputText value="#{mbPaciente.paciente.email}" title="Email do Paciente" type="email" placeholder="Email"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 					CPF:
-						<p:inputText value="" title="CPF do Paciente" type="" placeholder="CPF"/>
+						<p:inputText value="#{mbPaciente.paciente.cpf}" title="CPF do Paciente" type="" placeholder="CPF"/>
 						<p/>
 					Identidade:
-						<p:inputText value="" title="Identidade do Paciente" type="" placeholder="Identidade"/>
+						<p:inputText value="#{mbPaciente.paciente.identidade}" title="Identidade do Paciente" type="" placeholder="Identidade"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 					Data de Nascimento:
-						<p:calendar locale="pt" id="dataNascimento" title="Data de Nascimento" placeholder="Data de Nascimento"/>
+						<p:calendar locale="pt" id="dataNascimento" value="#{mbPaciente.paciente.dataNascimento}" title="Data de Nascimento" placeholder="Data de Nascimento"/>
 							<p/>
 					Sexo:
-					        <p:selectOneRadio id="sexo" value="" label="Sexo">
-					            <f:selectItem itemLabel="Masculino" itemValue="m" />
-					            <f:selectItem itemLabel="Feminino" itemValue="f" />
+					        <p:selectOneRadio id="sexo" value="#{mbPaciente.paciente.sexo}" label="Sexo">
+					            <f:selectItem itemLabel="Masculino" itemValue="M"/>
+					            <f:selectItem itemLabel="Feminino" itemValue="F"/>
 					        </p:selectOneRadio>
 					</h:panelGrid>
 					
@@ -213,14 +213,14 @@
 					
 					Telefone:
 						<h:panelGrid columns="2">
-								<p:inputText value="" title="Digite o DDD" type="text" size="5" maxlength="2" placeholder="DDD"/>
-								<p:inputText value="" title="Digite o Tel" type="" placeholder="Telefone"/>
+								<p:inputText value="#{mbPaciente.paciente.ddd}" title="Digite o DDD" type="text" size="5" maxlength="2" placeholder="DDD"/>
+								<p:inputText value="#{mbPaciente.paciente.telefone}" title="Digite o Tel" type="" placeholder="Telefone"/>
 						</h:panelGrid>
 					<p/>
 					Celular:
 						<h:panelGrid columns="2">
-								<p:inputText value="" title="Digite o DDD" type="text" size="5" maxlength="2" placeholder="DDD"/>
-								<p:inputText value="" title="Digite o Cel" type="" placeholder="Celular"/>
+<!-- 								<p:inputText value="" title="Digite o DDD" type="text" size="5" maxlength="2" placeholder="DDD"/> -->
+								<p:inputText value="#{mbPaciente.paciente.celular}" title="Digite o Cel" type="" placeholder="Celular"/>
 						</h:panelGrid>
 						
 					</h:panelGrid>
@@ -240,8 +240,8 @@
 				
 				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
 				<h:panelGrid columns="2">
-					<p:commandButton  value="Salvar" type="button" onclick="PF('dlg2').show();" />
-					<p:commandButton  value="Cancelar" type="button" />
+					<p:commandButton  value="Salvar" action="#{mbPaciente.cadastrar}" type="button" onclick="PF('dlg2').show();" />
+					<p:commandButton  value="Cancelar" action="#{mbPaciente.cancelarCadastro}" type="button" />
 				</h:panelGrid>
 			</h:form>
 			</p:panel>
