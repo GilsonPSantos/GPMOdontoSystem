@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Paciente extends Pessoa{
 	
-	private Integer flagAtivo; //0-NÃO, 1-SIM
+	
 	private List<Pagamento> listaPagamento;
 	private List<Tratamento> listaTratamento;
 	private List<Consulta> listaConsulta;
@@ -14,27 +14,6 @@ public class Paciente extends Pessoa{
 	private List<Agenda> listaAgenda;
 	
 	public Paciente() {
-	}
-
-	/**
-	 * @param flagAtivo
-	 */
-	public Paciente(Integer flagAtivo) {
-		super();
-		this.flagAtivo = flagAtivo;
-	}
-
-	@Override
-	public String toString() {
-		return "Paciente [flagAtivo=" + flagAtivo + "]";
-	}
-
-	public Integer getFlagAtivo() {
-		return flagAtivo;
-	}
-
-	public void setFlagAtivo(Integer flagAtivo) {
-		this.flagAtivo = flagAtivo;
 	}
 
 	public List<Pagamento> getListaPagamento() {

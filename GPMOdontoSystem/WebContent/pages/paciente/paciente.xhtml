@@ -47,66 +47,79 @@
 </h:head>
 	<h:body>
 		<!-- INICIO DO MODAL DO CADASTRO DE ENDEREÇO DO CLIENTE -->
-		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true" position="center">
+		<p:dialog header="Cadastro do Endereço" widgetVar="modalEnd" modal="true" position="center" id="modalEndereco">
 			
 			<!-- INICIO DO FORM DO CADASTRO DE ENDEREÇO DO CLIENTE -->
-			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12">
-			
+			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12" id="painelEndereco">
+			<p:messages id="mensagenValidacao" closable="true"/>
 			<div class="ui-g-12 ui-md-12 ui-lg-3"></div>
+			
+		<h:form id="formBuscaCep">
+		
+		<p:growl id="pgrowlBuscaCep"></p:growl>
 			<h:panelGrid columns="12" styleClass="ui-g-12 ui-md-12 ui-lg-6">
 				<h:panelGrid columns="1">
 					<h:panelGrid columns="2">
 						<h:panelGrid columns="1">
-							<p:inputText value="" title="Digite um Cep e clique em Buscar CEP" placeholder="Digite o CEP"/>
+							<p:inputText value="#{mbPaciente.endereco.cep}" title="Digite um Cep e clique em Buscar CEP" placeholder="Digite o CEP"/>
 						</h:panelGrid>
 						<h:panelGrid columns="1">
-							<p:button value="Buscar CEP"/>
+							<p:commandButton value="Buscar CEP" action="#{mbPaciente.buscarCep}" ajax="true" update=":formEndereco,:formBuscaCep"  />
 						</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGrid>
 			</h:panelGrid>
 			
-			<h:form id="formPaciente">
+		</h:form>
+			<h:form id="formEndereco">
+				<h:inputHidden value="#{mbPaciente.endereco.cep}"></h:inputHidden>
 				<h:panelGrid columns="3" >
 					
 					<h:panelGrid columns="1">
 							Logradouro:
-							<p:inputText size="50" value="" title="Logradouro do Paciente" type="text" placeholder="Logradouro"/>
+							<p:inputText size="50" required="true" requiredMessage="O campo Logradouro é obrigatório." 
+										 value="#{mbPaciente.endereco.logradouro}" title="Logradouro do Paciente" 
+										 type="text" placeholder="Logradouro"/>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1">
 							N.º:
-							<p:inputText size="7" value="" title="Digite o número do paciente" type="number" placeholder="N.º"/>
+							<p:inputText size="7" required="true" requiredMessage="O campo Número é obrigatório." 
+										 value="#{mbPaciente.endereco.numero}" title="Digite o número do paciente" type="number" placeholder="N.º"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							Complemento:
-							<p:inputText size="20" value="" title="Digite o complemento" type="text" placeholder="Complemento"/>
+							<p:inputText size="20" value="#{mbPaciente.endereco.complemento}" title="Digite o complemento" type="text" placeholder="Complemento"/>
 					</h:panelGrid>
 				</h:panelGrid>
 				<h:panelGrid columns="4" >
 					<h:panelGrid columns="1">
 							Bairro:
-							<p:inputText size="20" value="" title="Digite o bairro do Paciente" type="text" placeholder="Bairro"/>
+							<p:inputText size="20" required="true" requiredMessage="O campo Bairro é obrigatório." 
+										value="#{mbPaciente.endereco.bairro}" title="Digite o bairro do Paciente" type="text" placeholder="Bairro"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							Cidade:
-							<p:inputText size="25" value="" title="Digite a cidade do Paciente" type="text" placeholder="Cidade"/>
+							<p:inputText size="25" required="true" requiredMessage="O campo Cidade é obrigatório." 
+										value="#{mbPaciente.endereco.cidade}" title="Digite a cidade do Paciente" type="text" placeholder="Cidade"/>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1">
 							UF:
-							<p:inputText size="7" value="" title="Digite o estado do Paciente" type="email" placeholder="UF"/>
+							<p:inputText size="7" required="true" requiredMessage="O campo UF é obrigatório." 
+										value="#{mbPaciente.endereco.uf}" title="Digite o estado do Paciente" type="email" placeholder="UF"/>
 					</h:panelGrid>
-					<h:panelGrid columns="1">
-							País:
-							<p:inputText size="20" value="" title="Digite o país do Paciente" type="email" placeholder="País"/>
-					</h:panelGrid>
+<!-- 					<h:panelGrid columns="1"> -->
+<!-- 							País: -->
+<!-- 							<p:inputText size="20" title="Digite o país do Paciente" type="email" placeholder="País"/> -->
+<!-- 					</h:panelGrid> -->
 				</h:panelGrid>
 			
 				<p:panel style="text-align:center;">
-					<p:commandButton value="Cadastrar" onclick="PF('modalEnd').hide();"/>	
+					<p:commandButton value="Cadastrar" action="#{mbPaciente.cadastrarEndereco}" update=":formEndereco,:mensagenValidacao"/>	
 					
-					<p:commandButton value="Cancelar" onclick="PF('modalEnd').hide();"/>
+					<p:commandButton value="Cancelar"  onclick="PF('modalEnd').hide();" update=":formEndereco, :formBuscaCep" process="@this" action="#{mbPaciente.cancelarPreenchimentoEndereco}">
+					</p:commandButton>
 				</p:panel>
 			</h:form>
 			</p:panel>
@@ -124,11 +137,9 @@
 				<h:panelGrid columns="3" >
 					<h:panelGrid columns="1">
 							<p:outputLabel for="planoDeSaudo" value="Nome do Plano:"/>
-							<p:selectOneMenu id="planoDeSaudo" value=""  >
+							<p:selectOneMenu id="planoDeSaudo"  value="#{mbPaciente.plano}"  >
 								<f:selectItem itemLabel="Selecione um Plano" itemValue="" />
-								<f:selectItem itemLabel="Amil" itemValue="extracao" />
-								<f:selectItem itemLabel="Unimed" itemValue="limpeza" />
-								<f:selectItem itemLabel="Bradesco" itemValue="avaliacao" />
+								<f:selectItems value="#{mbPaciente.listaPlano}" var="plano" itemLabel="#{plano.nomePlano}" itemValue="#{plano.idPlano}" />
 							</p:selectOneMenu>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
@@ -181,9 +192,10 @@
 				<!-- INICIO PAINEL FORM PACIENTE -->
 			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12" header="Dados do Paciente">
 				<h:form id="formCadConsPaciente">
+				<p:growl></p:growl>
 <!-- 				<div class="ui-g-12 ui-md-12 ui-lg-1"></div> -->
+					<h:inputHidden value="#{mbPaciente.paciente.idPessoa}"></h:inputHidden>
 				<h:panelGrid columns="6">
-					
 					<h:panelGrid columns="1">
 					Nome:
 						<p:inputText value="#{mbPaciente.paciente.nomePessoa}" title="Nome do Paciente" placeholder="Nome"/>
@@ -200,7 +212,9 @@
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 					Data de Nascimento:
-						<p:calendar locale="pt" id="dataNascimento" value="#{mbPaciente.paciente.dataNascimento}" title="Data de Nascimento" placeholder="Data de Nascimento"/>
+						<p:calendar locale="pt" id="dataNascimento" pattern="dd/MM/yyyy" value="#{mbPaciente.paciente.dataNascimento.time}" title="Data de Nascimento" placeholder="Data de Nascimento">
+							<f:convertDateTime timeZone="GMT-3" type="date" pattern="dd/MM/yyyy" ></f:convertDateTime>
+						</p:calendar>
 							<p/>
 					Sexo:
 					        <p:selectOneRadio id="sexo" value="#{mbPaciente.paciente.sexo}" label="Sexo">
@@ -240,9 +254,10 @@
 				
 				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
 				<h:panelGrid columns="2">
-					<p:commandButton  value="Salvar" action="#{mbPaciente.cadastrar}" type="button" onclick="PF('dlg2').show();" />
+					<p:commandButton  value="Salvar" action="#{mbPaciente.cadastrarPaciente}" update=":formCadConsPaciente" />
 					<p:commandButton  value="Cancelar" action="#{mbPaciente.cancelarCadastro}" type="button" />
 				</h:panelGrid>
+				
 			</h:form>
 			</p:panel>
 			<!-- FIM PAINEL FORM PACIENTE -->

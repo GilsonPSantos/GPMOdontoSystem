@@ -1,6 +1,5 @@
 package br.com.gpmodontosystem.persistence.pacientedao;
 
-import java.sql.Statement;
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,18 +15,11 @@ public class PacienteDaoImp extends Dao implements IPacienteDao {
 	@Override
 	public void inserir(Paciente p) throws Exception {
 		open();
-		StringBuilder sql = new StringBuilder();
-		sql.append("INSERT INTO PACIENTE (PAC_ATIVO, PAC_CADASTRO, PAC_ATUALIZACAO, PESSOA_PES_CODIGO) ");
-		sql.append("VALUES (?, ?, ?, ?)");
-		stmt = con.prepareStatement(sql.toString() , Statement.RETURN_GENERATED_KEYS);
-		stmt.setInt(1, p.getFlagAtivo());
-		dataSql = new java.sql.Date(p.getDataCadastro().getTime().getTime());
-		stmt.setDate(2, dataSql);
-		dataSql = new java.sql.Date(p.getDataAtualizacao().getTime().getTime());
-		stmt.setDate(3, dataSql);
-		stmt.setInt(4, p.getIdPessoa());
-		
-	
+		String sql = "INSERT INTO PACIENTE (PAC_CODIGO) VALUES (?)";
+		stmt = con.prepareStatement(sql);
+		stmt.setInt(1, p.getIdPessoa());
+		stmt.execute();
+		stmt.close();
 	close();
 	}
 

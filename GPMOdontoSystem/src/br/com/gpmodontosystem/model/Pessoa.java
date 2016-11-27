@@ -19,6 +19,7 @@ public class Pessoa {
 	private String celular;
 	private String telefone;	
 	private Endereco endereco;
+	private Integer flagAtivo; //0-SIM, 1-NÃO
 	
 	public Pessoa() {
 	}
@@ -36,10 +37,11 @@ public class Pessoa {
 	 * @param ddd
 	 * @param celular
 	 * @param telefone
+	 * @param flagAtivo
 	 */
 	public Pessoa(Integer idPessoa, String cpf, String identidade, String nomePessoa, Calendar dataNascimento,
 			Calendar dataCadastro, Calendar dataAtualizacao, TypeSexo sexo, String email, String ddd, String celular,
-			String telefone) {
+			String telefone, Integer flagAtivo) {
 		super();
 		this.idPessoa = idPessoa;
 		this.cpf = cpf;
@@ -53,15 +55,15 @@ public class Pessoa {
 		this.ddd = ddd;
 		this.celular = celular;
 		this.telefone = telefone;
+		this.flagAtivo = flagAtivo;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Pessoa [idPessoa=" + idPessoa + ", cpf=" + cpf + ", identidade=" + identidade + ", nomePessoa="
 				+ nomePessoa + ", dataNascimento=" + dataNascimento + ", dataCadastro=" + dataCadastro
 				+ ", dataAtualizacao=" + dataAtualizacao + ", sexo=" + sexo + ", email=" + email + ", ddd=" + ddd
-				+ ", celular=" + celular + ", telefone=" + telefone + "]";
+				+ ", celular=" + celular + ", telefone=" + telefone + ", flagAtivo=" + flagAtivo + "]";
 	}
 
 	public Integer getIdPessoa() {
@@ -166,6 +168,14 @@ public class Pessoa {
 
 	public void setDataAtualizacao(Calendar dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
+	}
+
+	public Integer getFlagAtivo() {
+		return flagAtivo;
+	}
+
+	public void setFlagAtivo(Integer flagAtivo) {
+		this.flagAtivo = flagAtivo;
 	}
 	
 }

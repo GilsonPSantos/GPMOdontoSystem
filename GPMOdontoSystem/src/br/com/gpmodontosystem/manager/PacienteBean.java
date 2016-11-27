@@ -1,7 +1,8 @@
-package br.com.gpmodontosystem.manager.paciente;
+package br.com.gpmodontosystem.manager;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,12 +11,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.gpmodontosystem.model.Endereco;
 import br.com.gpmodontosystem.model.Paciente;
-import br.com.gpmodontosystem.persistence.pacientedao.IPacienteDao;
-import br.com.gpmodontosystem.persistence.pacientedao.PacienteDaoImp;
+import br.com.gpmodontosystem.model.Plano;
 import br.com.gpmodontosystem.service.paciente.IPacienteService;
 import br.com.gpmodontosystem.service.paciente.PacienteServiceImp;
-import br.com.gpmodontosystem.type.TypeSexo;
+import br.com.gpmodontosystem.service.plano.IPlanoService;
+import br.com.gpmodontosystem.service.plano.PlanoServiceImp;
+import br.com.gpmodontosystem.utilitario.BuscaCep;
 
 @ManagedBean(name="mbPaciente")
 @RequestScoped
@@ -25,25 +28,32 @@ public class PacienteBean implements Serializable {
 	private Paciente paciente;
 	private List<Paciente> listaPaciente;
 	
-	private IPacienteService pacienteService;
+	private Plano plano;
+	private List<Plano> listaPlano;
 	
-	private TypeSexo tipoSexo;
+	private Endereco endereco;
+	
+	private IPacienteService pacienteService;
+	private IPlanoService planoService;
+	
 	
 	@PostConstruct
 	public void init(){
 		paciente = new Paciente();
 		listaPaciente = new ArrayList<Paciente>();
 		pacienteService = new PacienteServiceImp();
+		Calendar c = Calendar.getInstance();
+		paciente.setDataNascimento(c);
 		
-		//dados fack para testes.
-		paciente.setNomePessoa("Gilson Santos");
-		paciente.setCpf("010212112121");
-		paciente.setSexo(TypeSexo.M);
-		paciente.setIdentidade("123456");
+		planoService = new PlanoServiceImp();
+		plano = new Plano();
+		
+		endereco = new Endereco();
 		
 	}
 	
-	public void cadastrar(){
+
+	public void cadastrarPaciente(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
 			pacienteService.inserir(paciente);
@@ -54,7 +64,7 @@ public class PacienteBean implements Serializable {
 		}
 	}
 	
-	public void consultar(){
+	public void consultarPaciente(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		
 		try {
@@ -65,15 +75,34 @@ public class PacienteBean implements Serializable {
 		}
 	}
 	
-	public void excluir(){
+	public void excluirPaciente(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		
 		
 	}
 	
-	public String cancelarCadastro(){
+	public String cancelarCadastroPaciente(){
 		
 		return null;
+	}
+	
+	public void buscarCep(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		try {
+			if(!new BuscaCep().buscarCep(endereco)){
+			fc.addMessage("formBuscaCep", new FacesMessage("CEP não localizado."));
+			}
+		} catch (Exception e) {
+			fc.addMessage("formBuscaCep", new FacesMessage("Ocorreu um erro interno ao consultar o CEP."));
+		}
+	}
+	
+	public void cancelarPreenchimentoEndereco(){
+		endereco = new Endereco();
+	}
+	
+	public void cadastrarEndereco(){
+		
 	}
 	
 	
@@ -100,13 +129,36 @@ public class PacienteBean implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	public TypeSexo getTipoSexo() {
-		return tipoSexo;
+	
+	public Plano getPlano() {
+		return plano;
 	}
 
-	public void setTipoSexo(TypeSexo tipoSexo) {
-		this.tipoSexo = tipoSexo;
+	public void setPlano(Plano plano) {
+		this.plano = plano;
+	}
+
+	public List<Plano> getListaPlano() {
+		try {
+			listaPlano = planoService.listarPlanos();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listaPlano;
+	}
+
+	public void setListaPlano(List<Plano> listaPlano) {
+		this.listaPlano = listaPlano;
+	}
+
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 	
 	
