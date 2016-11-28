@@ -25,7 +25,6 @@ public class PacienteDaoImp extends Dao implements IPacienteDao {
 
 	@Override
 	public Paciente consultarPeloId(Paciente p) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -43,9 +42,45 @@ public class PacienteDaoImp extends Dao implements IPacienteDao {
 
 	@Override
 	public List<Paciente> listarPacientes() throws Exception {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
+	
+	
+
+@Override
+public List<Paciente> listarPacientesPeloNomeCpfEmail(Paciente p) throws Exception {
+	open();
+	StringBuilder sql = new StringBuilder();
+	sql.append("SELECT PAC_CODIGO, PES_NOME FROM PACIENTE PAC ");
+	sql.append("INNER JOIN PESSOA PES ON PAC.PAC_CODIGO = PES.PES_CODIGO");	
+	
+	if(!p.getNomePessoa().equals(null) || !p.getNomePessoa().equals("")){
+		sql.append("WHERE PES_NOME LIKE '?%'");
+		stmt.setString(1, p.getNomePessoa());
+	}else if(!p.getEmail().equals(null) || !p.getEmail().equals("")){
+		sql.append("WHERE PES_EMAIL LIKE '?%'");
+		stmt.setString(1, p.getEmail());
+	}else if(!p.getCpf().equals(null) || !p.getCpf().equals("")){
+		sql.append("WHERE PES_CPF LIKE '?%'");
+		stmt.setString(1, p.getCpf());
+	}
+	
+	
+	stmt = con.prepareStatement(sql.toString());
+	
+	
+	
+	
+	
+	
+	close();
+	return null;
+}
+
+	
+	
+	
 
 public static void main(String[] args) {
 	Calendar c = Calendar.getInstance();

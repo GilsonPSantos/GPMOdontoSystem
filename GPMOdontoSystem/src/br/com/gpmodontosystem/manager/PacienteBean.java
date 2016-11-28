@@ -49,6 +49,7 @@ public class PacienteBean implements Serializable {
 		plano = new Plano();
 		
 		endereco = new Endereco();
+		paciente.setEndereco(endereco);
 		
 	}
 	
@@ -89,7 +90,7 @@ public class PacienteBean implements Serializable {
 	public void buscarCep(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
-			if(!new BuscaCep().buscarCep(endereco)){
+			if(!new BuscaCep().buscarCep(paciente.getEndereco())){
 			fc.addMessage("formBuscaCep", new FacesMessage("CEP não localizado."));
 			}
 		} catch (Exception e) {
@@ -99,6 +100,7 @@ public class PacienteBean implements Serializable {
 	
 	public void cancelarPreenchimentoEndereco(){
 		endereco = new Endereco();
+		paciente.setEndereco(endereco);
 	}
 	
 	public void cadastrarEndereco(){

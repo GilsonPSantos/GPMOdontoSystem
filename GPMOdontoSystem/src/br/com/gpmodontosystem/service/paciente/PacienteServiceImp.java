@@ -6,8 +6,8 @@ import java.util.List;
 import br.com.gpmodontosystem.model.Paciente;
 import br.com.gpmodontosystem.persistence.pacientedao.IPacienteDao;
 import br.com.gpmodontosystem.persistence.pacientedao.PacienteDaoImp;
-import br.com.gpmodontosystem.persistence.pessoa.IPessoaDao;
-import br.com.gpmodontosystem.persistence.pessoa.PessoaDaoImp;
+import br.com.gpmodontosystem.persistence.pessoadao.IPessoaDao;
+import br.com.gpmodontosystem.persistence.pessoadao.PessoaDaoImp;
 
 public class PacienteServiceImp implements IPacienteService{
 
@@ -49,6 +49,12 @@ public class PacienteServiceImp implements IPacienteService{
 
 	@Override
 	public List<Paciente> listarPacientes() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Paciente> listarPacientesPeloNomeCpfEmail(Paciente p) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}

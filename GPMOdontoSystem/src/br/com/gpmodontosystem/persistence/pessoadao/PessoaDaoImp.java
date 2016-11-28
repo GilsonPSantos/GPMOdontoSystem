@@ -1,4 +1,4 @@
-package br.com.gpmodontosystem.persistence.pessoa;
+package br.com.gpmodontosystem.persistence.pessoadao;
 
 import java.sql.Date;
 import java.sql.Statement;

@@ -61,7 +61,7 @@
 				<h:panelGrid columns="1">
 					<h:panelGrid columns="2">
 						<h:panelGrid columns="1">
-							<p:inputText value="#{mbPaciente.endereco.cep}" title="Digite um Cep e clique em Buscar CEP" placeholder="Digite o CEP"/>
+							<p:inputText value="#{mbPaciente.paciente.endereco.cep}" title="Digite um Cep e clique em Buscar CEP" placeholder="Digite o CEP"/>
 						</h:panelGrid>
 						<h:panelGrid columns="1">
 							<p:commandButton value="Buscar CEP" action="#{mbPaciente.buscarCep}" ajax="true" update=":formEndereco,:formBuscaCep"  />
@@ -78,36 +78,36 @@
 					<h:panelGrid columns="1">
 							Logradouro:
 							<p:inputText size="50" required="true" requiredMessage="O campo Logradouro é obrigatório." 
-										 value="#{mbPaciente.endereco.logradouro}" title="Logradouro do Paciente" 
+										 value="#{mbPaciente.paciente.endereco.logradouro}" title="Logradouro do Paciente" 
 										 type="text" placeholder="Logradouro"/>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1">
 							N.º:
 							<p:inputText size="7" required="true" requiredMessage="O campo Número é obrigatório." 
-										 value="#{mbPaciente.endereco.numero}" title="Digite o número do paciente" type="number" placeholder="N.º"/>
+										 value="#{mbPaciente.paciente.endereco.numero}" title="Digite o número do paciente" type="number" placeholder="N.º"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							Complemento:
-							<p:inputText size="20" value="#{mbPaciente.endereco.complemento}" title="Digite o complemento" type="text" placeholder="Complemento"/>
+							<p:inputText size="20" value="#{mbPaciente.paciente.endereco.complemento}" title="Digite o complemento" type="text" placeholder="Complemento"/>
 					</h:panelGrid>
 				</h:panelGrid>
 				<h:panelGrid columns="4" >
 					<h:panelGrid columns="1">
 							Bairro:
 							<p:inputText size="20" required="true" requiredMessage="O campo Bairro é obrigatório." 
-										value="#{mbPaciente.endereco.bairro}" title="Digite o bairro do Paciente" type="text" placeholder="Bairro"/>
+										value="#{mbPaciente.paciente.endereco.bairro}" title="Digite o bairro do Paciente" type="text" placeholder="Bairro"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							Cidade:
 							<p:inputText size="25" required="true" requiredMessage="O campo Cidade é obrigatório." 
-										value="#{mbPaciente.endereco.cidade}" title="Digite a cidade do Paciente" type="text" placeholder="Cidade"/>
+										value="#{mbPaciente.paciente.endereco.cidade}" title="Digite a cidade do Paciente" type="text" placeholder="Cidade"/>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1">
 							UF:
 							<p:inputText size="7" required="true" requiredMessage="O campo UF é obrigatório." 
-										value="#{mbPaciente.endereco.uf}" title="Digite o estado do Paciente" type="email" placeholder="UF"/>
+										value="#{mbPaciente.paciente.endereco.uf}" title="Digite o estado do Paciente" type="email" placeholder="UF"/>
 					</h:panelGrid>
 <!-- 					<h:panelGrid columns="1"> -->
 <!-- 							País: -->

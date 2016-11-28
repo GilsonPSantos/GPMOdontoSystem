@@ -1,4 +1,4 @@
-package br.com.gpmodontosystem.persistence.pessoa;
+package br.com.gpmodontosystem.persistence.pessoadao;
 
 import br.com.gpmodontosystem.model.Pessoa;
 import br.com.gpmodontosystem.persistence.dao.ICrudDao;
