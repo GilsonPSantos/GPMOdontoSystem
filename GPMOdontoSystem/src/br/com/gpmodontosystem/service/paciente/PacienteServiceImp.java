@@ -19,29 +19,25 @@ public class PacienteServiceImp implements IPacienteService{
 		pessoaDao = new PessoaDaoImp();
 	}
 	
-	@Override
 	public void inserir(Paciente p) throws Exception {
 		Calendar c = Calendar.getInstance();
-		p.setFlagAtivo(1);
+		p.setFlagAtivo(0);
 		p.setDataCadastro(c);
 		p.setDataAtualizacao(c);
 		pessoaDao.inserir(p);
 		pacienteDao.inserir(p);
 	}
 
-	@Override
 	public Paciente consultarPeloId(Paciente p) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public void alterar(Paciente p) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void deletar(Paciente p) throws Exception {
 		// TODO Auto-generated method stub
 		

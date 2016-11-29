@@ -14,6 +14,8 @@ import javax.faces.context.FacesContext;
 import br.com.gpmodontosystem.model.Endereco;
 import br.com.gpmodontosystem.model.Paciente;
 import br.com.gpmodontosystem.model.Plano;
+import br.com.gpmodontosystem.service.endereco.EnderecoServiceImpl;
+import br.com.gpmodontosystem.service.endereco.IEnderecoService;
 import br.com.gpmodontosystem.service.paciente.IPacienteService;
 import br.com.gpmodontosystem.service.paciente.PacienteServiceImp;
 import br.com.gpmodontosystem.service.plano.IPlanoService;
@@ -35,6 +37,11 @@ public class PacienteBean implements Serializable {
 	
 	private IPacienteService pacienteService;
 	private IPlanoService planoService;
+	private IEnderecoService enderecoService;
+	
+	private boolean flagCadastroEndereco = true;
+	private boolean flagCadastroPaciente = true;
+	private boolean flagCadastroConvenio = true;
 	
 	
 	@PostConstruct
@@ -104,10 +111,21 @@ public class PacienteBean implements Serializable {
 	}
 	
 	public void cadastrarEndereco(){
-		
+		FacesContext fc = FacesContext.getCurrentInstance();
+		try {
+			enderecoService = new EnderecoServiceImpl();
+			enderecoService.inserir(paciente);
+			flagCadastroEndereco = false;
+			fc.addMessage("formCadConsPaciente", new FacesMessage("Endereço cadastrado com sucesso."));
+		} catch (Exception e) {
+			e.printStackTrace();
+			fc.addMessage("formCadConsPaciente", new FacesMessage("Ocorreu um erro interno ao cadastrar o endereço."));
+		}
 	}
 	
-	
+	public void alterarEndereco(){
+		
+	}
 	
 	
 	
@@ -162,6 +180,37 @@ public class PacienteBean implements Serializable {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
+
+
+	public boolean isFlagCadastroEndereco() {
+		return flagCadastroEndereco;
+	}
+
+
+	public void setFlagCadastroEndereco(boolean flagCadastroEndereco) {
+		this.flagCadastroEndereco = flagCadastroEndereco;
+	}
+
+
+	public boolean isFlagCadastroPaciente() {
+		return flagCadastroPaciente;
+	}
+
+
+	public void setFlagCadastroPaciente(boolean flagCadastroPaciente) {
+		this.flagCadastroPaciente = flagCadastroPaciente;
+	}
+
+
+	public boolean isFlagCadastroConvenio() {
+		return flagCadastroConvenio;
+	}
+
+
+	public void setFlagCadastroConvenio(boolean flagCadastroConvenio) {
+		this.flagCadastroConvenio = flagCadastroConvenio;
+	}
+	
 	
 	
 

@@ -55,7 +55,7 @@
 			<div class="ui-g-12 ui-md-12 ui-lg-3"></div>
 			
 		<h:form id="formBuscaCep">
-		
+		<h:inputHidden value="#{mbPaciente.paciente.idPessoa}" id="idPessoa"></h:inputHidden>
 		<p:growl id="pgrowlBuscaCep"></p:growl>
 			<h:panelGrid columns="12" styleClass="ui-g-12 ui-md-12 ui-lg-6">
 				<h:panelGrid columns="1">
@@ -72,6 +72,7 @@
 			
 		</h:form>
 			<h:form id="formEndereco">
+				<h:inputHidden value="#{mbPaciente.paciente.idPessoa}" id="idPessoa"></h:inputHidden>
 				<h:inputHidden value="#{mbPaciente.endereco.cep}"></h:inputHidden>
 				<h:panelGrid columns="3" >
 					
@@ -116,7 +117,8 @@
 				</h:panelGrid>
 			
 				<p:panel style="text-align:center;">
-					<p:commandButton value="Cadastrar" action="#{mbPaciente.cadastrarEndereco}" update=":formEndereco,:mensagenValidacao"/>	
+					<p:commandButton value="Cadastrar" rendered="#{mbPaciente.flagCadastroEndereco == true}" action="#{mbPaciente.cadastrarEndereco}" update=":formEndereco,:mensagenValidacao"/>	
+					<p:commandButton value="Alterar" rendered="#{mbPaciente.flagCadastroEndereco == false}" action="#{mbPaciente.alterarEndereco}" update=":formEndereco,:mensagenValidacao"/>
 					
 					<p:commandButton value="Cancelar"  onclick="PF('modalEnd').hide();" update=":formEndereco, :formBuscaCep" process="@this" action="#{mbPaciente.cancelarPreenchimentoEndereco}">
 					</p:commandButton>
@@ -254,7 +256,8 @@
 				
 				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
 				<h:panelGrid columns="2">
-					<p:commandButton  value="Salvar" action="#{mbPaciente.cadastrarPaciente}" update=":formCadConsPaciente" />
+					<p:commandButton rendered="#{mbPaciente.paciente.idPessoa == null}"  value="Salvar" action="#{mbPaciente.cadastrarPaciente}" update=":formCadConsPaciente, :formEndereco, :formBuscaCep" />
+					<p:commandButton rendered="#{mbPaciente.paciente.idPessoa != null}"  value="Salvar" action="#{mbPaciente.alterarPaciente}" update=":formCadConsPaciente, :formEndereco, :formBuscaCep" />
 					<p:commandButton  value="Cancelar" action="#{mbPaciente.cancelarCadastro}" type="button" />
 				</h:panelGrid>
 				

@@ -31,11 +31,7 @@ public class EnderecoDaoImp extends Dao implements IEnderecoDao {
 			stmt.setDate(10, new Date(e.getDataCadastro().getTimeInMillis()));
 			stmt.setDate(11, new Date(e.getDataAtualizacao().getTimeInMillis()));
 			stmt.execute();
-			rs = stmt.getGeneratedKeys();
-			rs.next();
-			e.setIdEndereco(rs.getInt(1));
 			stmt.close();
-			rs.close();
 		close();
 	}
 
