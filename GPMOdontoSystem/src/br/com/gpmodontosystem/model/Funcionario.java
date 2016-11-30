@@ -5,7 +5,6 @@ import br.com.gpmodontosystem.type.TypeFuncionario;
 public class Funcionario extends Pessoa {
 	
 	private String matricula;
-	private Integer flagAtivo; //0-INATIVO, 1-ATIVO
 	private Usuario usuario;
 	private TypeFuncionario tipoFuncionario;
 	
@@ -17,16 +16,15 @@ public class Funcionario extends Pessoa {
 	 * @param flagAtivo
 	 * @param tipoFuncionario
 	 */
-	public Funcionario(String matricula, Integer flagAtivo, TypeFuncionario tipoFuncionario) {
+	public Funcionario(String matricula, TypeFuncionario tipoFuncionario) {
 		super();
 		this.matricula = matricula;
-		this.flagAtivo = flagAtivo;
 		this.tipoFuncionario = tipoFuncionario;
 	}
 
 	@Override
 	public String toString() {
-		return "Funcionario [matricula=" + matricula + ", flagAtivo=" + flagAtivo + ", tipoFuncionario="
+		return "Funcionario [matricula=" + matricula + ", flagAtivo=" + ", tipoFuncionario="
 				+ tipoFuncionario + "]";
 	}
 
@@ -36,14 +34,6 @@ public class Funcionario extends Pessoa {
 
 	public void setMatricula(String matricula) {
 		this.matricula = matricula;
-	}
-
-	public Integer getFlagAtivo() {
-		return flagAtivo;
-	}
-
-	public void setFlagAtivo(Integer flagAtivo) {
-		this.flagAtivo = flagAtivo;
 	}
 
 	public Usuario getUsuario() {

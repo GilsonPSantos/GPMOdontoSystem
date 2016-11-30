@@ -65,7 +65,7 @@ public class PacienteBean implements Serializable {
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
 			pacienteService.inserir(paciente);
-			fc.addMessage("formCadConsPaciente", new FacesMessage("Paciente gravado com sucesso."));
+			fc.addMessage("formCadConsPaciente", new FacesMessage("Paciente cadastrado com sucesso."));
 		} catch (Exception e) {
 			fc.addMessage("formCadConsPaciente", new FacesMessage("Ocorreu um erro interno ao salvar o Paciente."));
 			e.printStackTrace();

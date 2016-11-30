@@ -14,9 +14,10 @@ public class FuncionarioDaoImp extends Dao implements IFuncionarioDao{
 	@Override
 	public void inserir(Funcionario f) throws Exception {
 		open();
-			String sql = "INSERT INTO FUNCIONARIO (FUN_CODIGO) VALUES (?)";
+			String sql = "INSERT INTO FUNCIONARIO (FUN_CODIGO, FUN_MATRICULA) VALUES (?,?)";
 			stmt = con.prepareStatement(sql);
 			stmt.setInt(1, f.getIdPessoa());
+			stmt.setString(2, f.getMatricula());
 			stmt.execute();
 			stmt.close();
 		close();
