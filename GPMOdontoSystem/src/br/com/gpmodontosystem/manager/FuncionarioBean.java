@@ -78,6 +78,10 @@ public class FuncionarioBean implements Serializable{
 		}
 	}
 	
+	public void cancelarPreenchimentoEndereco(){
+		funcionario.setEndereco(new Endereco());
+	}
+	
 
 	public Funcionario getFuncionario() {
 		return funcionario;

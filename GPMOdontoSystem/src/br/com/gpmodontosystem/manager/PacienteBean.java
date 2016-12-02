@@ -42,6 +42,7 @@ public class PacienteBean implements Serializable {
 	private boolean flagCadastroEndereco = true;
 	private boolean flagCadastroPaciente = true;
 	private boolean flagCadastroConvenio = true;
+	private String nomeAutoComplete;
 	
 	
 	@PostConstruct
@@ -81,6 +82,17 @@ public class PacienteBean implements Serializable {
 			fc.addMessage("formCadConsPaciente", new FacesMessage("Ocorreu um erro interno ao consultar o Paciente."));
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public List<Paciente> listarPacienteAutoComplete(String nome){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		try {
+			listaPaciente = pacienteService.listarPacientesPeloNomeCpfEmail(nome);
+		} catch (Exception e) {
+			fc.addMessage("formAutoCompletePaciente", new FacesMessage("Ocorreu um erro interno ao consultar o Paciente."));
+		}
+		return listaPaciente;
 	}
 	
 	public void excluirPaciente(){
@@ -209,6 +221,16 @@ public class PacienteBean implements Serializable {
 
 	public void setFlagCadastroConvenio(boolean flagCadastroConvenio) {
 		this.flagCadastroConvenio = flagCadastroConvenio;
+	}
+
+
+	public String getNomeAutoComplete() {
+		return nomeAutoComplete;
+	}
+
+
+	public void setNomeAutoComplete(String nomeAutoComplete) {
+		this.nomeAutoComplete = nomeAutoComplete;
 	}
 	
 	

@@ -9,6 +9,6 @@ public interface IPacienteDao extends ICrudDao<Paciente> {
 	
 	public List<Paciente> listarPacientes() throws Exception;
 	
-	public List<Paciente> listarPacientesPeloNomeCpfEmail(Paciente p) throws Exception;
+	public List<Paciente> listarPacientesPeloNomeCpfEmail(String nome) throws Exception;
 
 }

@@ -15,6 +15,13 @@ public class Paciente extends Pessoa{
 	
 	public Paciente() {
 	}
+	
+	@Override
+	public String toString() {
+		return "" + getNomePessoa();
+	}
+
+
 
 	public List<Pagamento> getListaPagamento() {
 		return listaPagamento;

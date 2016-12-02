@@ -57,13 +57,20 @@ public class Pessoa {
 		this.telefone = telefone;
 		this.flagAtivo = flagAtivo;
 	}
+	
+	
+
+//	@Override
+//	public String toString() {
+//		return "Pessoa [idPessoa=" + idPessoa + ", cpf=" + cpf + ", identidade=" + identidade + ", nomePessoa="
+//				+ nomePessoa + ", dataNascimento=" + dataNascimento + ", dataCadastro=" + dataCadastro
+//				+ ", dataAtualizacao=" + dataAtualizacao + ", sexo=" + sexo + ", email=" + email + ", ddd=" + ddd
+//				+ ", celular=" + celular + ", telefone=" + telefone + ", flagAtivo=" + flagAtivo + "]";
+//	}
 
 	@Override
 	public String toString() {
-		return "Pessoa [idPessoa=" + idPessoa + ", cpf=" + cpf + ", identidade=" + identidade + ", nomePessoa="
-				+ nomePessoa + ", dataNascimento=" + dataNascimento + ", dataCadastro=" + dataCadastro
-				+ ", dataAtualizacao=" + dataAtualizacao + ", sexo=" + sexo + ", email=" + email + ", ddd=" + ddd
-				+ ", celular=" + celular + ", telefone=" + telefone + ", flagAtivo=" + flagAtivo + "]";
+		return ""+ nomePessoa;
 	}
 
 	public Integer getIdPessoa() {

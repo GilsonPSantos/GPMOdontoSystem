@@ -33,8 +33,9 @@
 						<f:facet name="options">
 							<p:outputLabel value="Pesquisar Paciente:" for="acForce" />
 							<p:autoComplete id="acForce" forceSelection="true"
-								value="#{autoCompleteView.txt5}"
-								completeMethod="#{autoCompleteView.completeText}"
+								itemLabel="#{nomePessoa}"
+								itemValue="#{idPessoa}"
+								completeMethod="#{mbPaciente.listarPacienteAutoComplete}"
 								placeholder="Nome, Email ou Cpf" />
 
 							<h:form>

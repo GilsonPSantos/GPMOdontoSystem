@@ -115,7 +115,7 @@
 					<p:commandButton value="Alterar" rendered="#{mbFuncionario.flagCadastroEndereco == false}" action="#{mbFuncionario.alterarEndereco}" update=":formEnderecoFunc,:mensagenValidacao"/>
 					
 					
-					<p:commandButton value="Cancelar" onclick="PF('modalEnd').hide();"/>
+					<p:commandButton value="Cancelar" onclick="PF('modalEnd').hide();" update=":formEnderecoFunc, :formBuscaCepFunc" process="@this" action="#{mbFuncionario.cancelarPreenchimentoEndereco}"/>
 				</p:panel>
 			</h:form>
 			</p:panel>

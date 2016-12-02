@@ -50,9 +50,8 @@ public class PacienteServiceImp implements IPacienteService{
 	}
 
 	@Override
-	public List<Paciente> listarPacientesPeloNomeCpfEmail(Paciente p) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Paciente> listarPacientesPeloNomeCpfEmail(String nome) throws Exception {
+		return pacienteDao.listarPacientesPeloNomeCpfEmail(nome);
 	}
 
 }

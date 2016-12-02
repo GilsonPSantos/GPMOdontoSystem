@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.gpmodontosystem.model.Funcionario;
+import br.com.gpmodontosystem.model.Paciente;
 import br.com.gpmodontosystem.persistence.funcionariodao.FuncionarioDaoImp;
 import br.com.gpmodontosystem.persistence.funcionariodao.IFuncionarioDao;
 import br.com.gpmodontosystem.persistence.pessoadao.IPessoaDao;
@@ -52,5 +53,6 @@ public class FuncionarioServiceImp implements IFuncionarioService{
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 
 }

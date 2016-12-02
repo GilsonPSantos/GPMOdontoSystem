@@ -1,5 +1,6 @@
 package br.com.gpmodontosystem.persistence.pacientedao;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -49,33 +50,29 @@ public class PacienteDaoImp extends Dao implements IPacienteDao {
 	
 
 @Override
-public List<Paciente> listarPacientesPeloNomeCpfEmail(Paciente p) throws Exception {
+public List<Paciente> listarPacientesPeloNomeCpfEmail(String nome) throws Exception {
 	open();
 	StringBuilder sql = new StringBuilder();
 	sql.append("SELECT PAC_CODIGO, PES_NOME FROM PACIENTE PAC ");
-	sql.append("INNER JOIN PESSOA PES ON PAC.PAC_CODIGO = PES.PES_CODIGO");	
-	
-	if(!p.getNomePessoa().equals(null) || !p.getNomePessoa().equals("")){
-		sql.append("WHERE PES_NOME LIKE '?%'");
-		stmt.setString(1, p.getNomePessoa());
-	}else if(!p.getEmail().equals(null) || !p.getEmail().equals("")){
-		sql.append("WHERE PES_EMAIL LIKE '?%'");
-		stmt.setString(1, p.getEmail());
-	}else if(!p.getCpf().equals(null) || !p.getCpf().equals("")){
-		sql.append("WHERE PES_CPF LIKE '?%'");
-		stmt.setString(1, p.getCpf());
-	}
-	
+	sql.append("INNER JOIN PESSOA PES ON PAC.PAC_CODIGO = PES.PES_CODIGO WHERE PES_NOME LIKE ? OR PES_CPF LIKE ? OR PES_EMAIL LIKE ?");	
 	
 	stmt = con.prepareStatement(sql.toString());
-	
-	
-	
-	
-	
-	
+	stmt.setString(1, nome + "%");
+	stmt.setString(2, nome+ "%");
+	stmt.setString(3, nome+ "%");
+	rs = stmt.executeQuery();
+	Paciente pc = null;
+	List<Paciente> lst = new ArrayList<>();
+	while(rs.next()){
+		pc = new Paciente();
+		pc.setNomePessoa(rs.getString("PES_NOME"));
+		pc.setIdPessoa(rs.getInt("PAC_CODIGO"));
+		lst.add(pc);
+	}
+	stmt.close();
+	rs.close();
 	close();
-	return null;
+	return lst;
 }
 
 	
