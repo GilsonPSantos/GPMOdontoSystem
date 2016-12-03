@@ -37,7 +37,15 @@ public class EnderecoDaoImp extends Dao implements IEnderecoDao {
 
 	@Override
 	public Endereco consultarPeloId(Endereco e) throws Exception {
-		// TODO Auto-generated method stub
+		StringBuilder sql = new StringBuilder();
+		sql.append("");
+		sql.append("");
+		sql.append("");
+		
+		
+		
+		
+		
 		return null;
 	}
 

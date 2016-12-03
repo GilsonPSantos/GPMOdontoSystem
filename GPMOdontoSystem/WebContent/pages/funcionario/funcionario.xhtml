@@ -64,7 +64,7 @@
 							<p:inputText value="#{mbFuncionario.funcionario.endereco.cep}" title="Digite um Cep e clique em Buscar CEP" placeholder="Digite o CEP"/>
 						</h:panelGrid>
 						<h:panelGrid columns="1">
-							<p:commandButton value="Buscar CEP" action="#{mbFuncionario.buscarCep}" ajax="true" update=":formEnderecoFunc,:formBuscaCepFunc"  />
+							<p:commandButton value="Buscar CEP" action="#{mbFuncionario.buscarCep}" ajax="true" update=":formEnderecoFunc,:formBuscaCepFunc" />
 						</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGrid>
@@ -112,13 +112,18 @@
 <!-- 					</h:panelGrid> -->
 				</h:panelGrid>
 			
-				<p:panel style="text-align:center;">
-					<p:commandButton value="Cadastrar" rendered="#{mbFuncionario.flagCadastroEndereco == true}" action="#{mbFuncionario.cadastrarEndereco}" update=":formEnderecoFunc, :formCadConsFuncionario"/>	
-					<p:commandButton value="Alterar" rendered="#{mbFuncionario.flagCadastroEndereco == false}" action="#{mbFuncionario.alterarEndereco}" update=":formEnderecoFunc,:mensagenValidacao"/>
+				<p:panel>
+				
+				<div class="ui-g-12 ui-md-12 ui-lg-4"></div>
+				
+				<h:panelGrid columns="4" style="text-align:center;">
+					<p:commandButton value="Cadastrar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoCadastrar};" action="#{mbFuncionario.cadastrarEndereco}" update=":formEnderecoFunc, :formCadConsFuncionario"/>	
+					<p:commandButton value="Alterar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoAlterar};" action="#{mbFuncionario.alterarEndereco}" update=":formEnderecoFunc,:mensagenValidacao"/>
 					
 					
-					<p:commandButton value="Cancelar" rendered="#{mbFuncionario.flagCadastroEndereco == true}" onclick="PF('modalEnd').hide();" update=":formEnderecoFunc, :formBuscaCepFunc" process="@this" action="#{mbFuncionario.cancelarPreenchimentoEndereco}"/>
-					<p:commandButton value="Fechar" rendered="#{mbFuncionario.flagCadastroEndereco == false}" onclick="PF('modalEnd').hide();"/>
+					<p:commandButton value="Cancelar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoCadastrar};" onclick="PF('modalEnd').hide();" update=":formEnderecoFunc, :formBuscaCepFunc" process="@this" action="#{mbFuncionario.cancelarPreenchimentoEndereco}"/>
+					<p:commandButton value="Fechar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoAlterar};" onclick="PF('modalEnd').hide();"/>
+				</h:panelGrid>
 				</p:panel>
 			</h:form>
 			</p:panel>
@@ -201,11 +206,12 @@
 				</h:panelGrid>
 				
 				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
-				<h:panelGrid columns="2">
-					<p:commandButton  value="Salvar" rendered="#{mbFuncionario.funcionario.idPessoa == null}" action="#{mbFuncionario.cadastrarFuncionario}" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc, :formTabelaFuncionario" />
-					<p:commandButton  value="Alterar" rendered="#{mbFuncionario.funcionario.idPessoa != null}" action="#{mbFuncionario.cadastrarFuncionario}" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc, :formTabelaFuncionario" />
-					<p:commandButton  value="Cancelar" type="button" />
-				</h:panelGrid>
+				<h:panelGrid columns="3">
+					<p:commandButton  value="Salvar" style="display:#{mbFuncionario.styleDisplayBtnFormFuncionarioCadastrar};" action="#{mbFuncionario.cadastrarFuncionario}" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc, :formTabelaFuncionario" />
+
+					<p:commandButton  value="Alterar" style="display:#{mbFuncionario.styleDisplayBtnFormFuncionarioAlterar};" action="#{mbFuncionario.alterarFuncionario}" update=":formCadConsFuncionario, :formTabelaFuncionario" />
+					<p:button  value="Cancelar" href="../../index.jsf" />
+				</h:panelGrid>	
 			</h:form>
 			</p:panel>
 			<!-- FIM PAINEL FORM FUNCIONÁRIOS -->

@@ -2,13 +2,19 @@ package br.com.gpmodontosystem.manager;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.EventListener;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.UICommand;
+import javax.faces.component.UIInput;
+import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.MethodExpressionActionListener;
 
 import br.com.gpmodontosystem.model.Endereco;
 import br.com.gpmodontosystem.model.Funcionario;
@@ -34,6 +40,11 @@ public class FuncionarioBean implements Serializable{
 	private IFuncionarioService funcionarioService;
 	private IEnderecoService enderecoService;
 	
+	private String styleDisplayBtnFormFuncionarioCadastrar;
+	private String styleDisplayBtnFormFuncionarioAlterar;
+	private String styleDisplayBtnFormEnderecoCadastrar;
+	private String styleDisplayBtnFormEnderecoAlterar;
+	
 	@PostConstruct
 	public void init(){
 		funcionarioService = new FuncionarioServiceImp();
@@ -42,6 +53,13 @@ public class FuncionarioBean implements Serializable{
 		funcionario.setUsuario(new Usuario());
 		Calendar c = Calendar.getInstance();
 		funcionario.setDataNascimento(c);
+		
+		flagCadastroEndereco = Boolean.TRUE;
+		styleDisplayBtnFormFuncionarioCadastrar = "block";
+		styleDisplayBtnFormFuncionarioAlterar = "none";
+		
+		styleDisplayBtnFormEnderecoCadastrar = "block";
+		styleDisplayBtnFormEnderecoAlterar = "none";
 	}
 	
 	public void cadastrarFuncionario(){
@@ -49,6 +67,8 @@ public class FuncionarioBean implements Serializable{
 		try {//alterar a criação da tabela de funcionario para apontar a chave para a tabela pessoa
 			funcionarioService.inserir(funcionario);
 			labelBtnModalEnd = "Adicionar Endereço";
+			styleDisplayBtnFormFuncionarioCadastrar = "none";
+			styleDisplayBtnFormFuncionarioAlterar = "block";
 			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionário cadastrado com sucesso."));
 		} catch (Exception e) {
 			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao cadastrar o Funcionário."));
@@ -61,21 +81,47 @@ public class FuncionarioBean implements Serializable{
 		try {
 			funcionario = funcionarioService.consultarPeloId(funcionario);
 			labelBtnModalEnd = "Consultar Endereço";
+			styleDisplayBtnFormFuncionarioCadastrar = "none";
+			styleDisplayBtnFormFuncionarioAlterar = "block";
+			
+			styleDisplayBtnFormEnderecoCadastrar = "none";
+			styleDisplayBtnFormEnderecoAlterar = "block";
 			
 		} catch (Exception e) {
+			styleDisplayBtnFormFuncionarioCadastrar = "block";
+			styleDisplayBtnFormFuncionarioAlterar = "none";
 			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao consultar o Funcionário."));
 			e.printStackTrace();
 		}
 	}
+	
+//	public void mudarBtnSalvarAlterar(ActionEvent event){
+//		FacesContext fc = FacesContext.getCurrentInstance();
+//		HtmlCommandButton btn = new HtmlCommandButton();
+//		
+////		btn.setActionExpression();
+//				
+//	}
 	
 	public void alterarFuncionario(){
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
 			funcionarioService.alterar(funcionario);
 			labelBtnModalEnd = "Consultar Endereço";
+			styleDisplayBtnFormFuncionarioCadastrar = "none";
+			styleDisplayBtnFormFuncionarioAlterar = "block";
+			
+			styleDisplayBtnFormEnderecoCadastrar = "none";
+			styleDisplayBtnFormEnderecoAlterar = "block";
 			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionário alterado com sucesso."));
 			
 		} catch (Exception e) {
+			labelBtnModalEnd = "Consultar Endereço";
+			styleDisplayBtnFormFuncionarioCadastrar = "none";
+			styleDisplayBtnFormFuncionarioAlterar = "block";
+			
+			styleDisplayBtnFormEnderecoCadastrar = "none";
+			styleDisplayBtnFormEnderecoAlterar = "block";
 			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao alterar o Funcionário."));
 			e.printStackTrace();
 		}
@@ -89,9 +135,13 @@ public class FuncionarioBean implements Serializable{
 			enderecoService = new EnderecoServiceImpl();
 			enderecoService.inserir(funcionario);
 			flagCadastroEndereco = false;
+			styleDisplayBtnFormEnderecoCadastrar = "none";
+			styleDisplayBtnFormEnderecoAlterar = "block";
 			labelBtnModalEnd = "Consultar Endereço";
 			fc.addMessage("pgrowlBuscaCep", new FacesMessage("Endereço cadastrado com sucesso."));
 		} catch (Exception e) {
+			styleDisplayBtnFormEnderecoCadastrar = "block";
+			styleDisplayBtnFormEnderecoAlterar = "none";
 			e.printStackTrace();
 			fc.addMessage("pgrowlBuscaCep", new FacesMessage("Ocorreu um erro interno ao cadastrar o endereço."));
 		}
@@ -160,6 +210,38 @@ public class FuncionarioBean implements Serializable{
 
 	public void setLabelBtnModalEnd(String labelBtnModalEnd) {
 		this.labelBtnModalEnd = labelBtnModalEnd;
+	}
+
+	public String getStyleDisplayBtnFormFuncionarioCadastrar() {
+		return styleDisplayBtnFormFuncionarioCadastrar;
+	}
+
+	public void setStyleDisplayBtnFormFuncionarioCadastrar(String styleDisplayBtnFormFuncionarioCadastrar) {
+		this.styleDisplayBtnFormFuncionarioCadastrar = styleDisplayBtnFormFuncionarioCadastrar;
+	}
+
+	public String getStyleDisplayBtnFormFuncionarioAlterar() {
+		return styleDisplayBtnFormFuncionarioAlterar;
+	}
+
+	public void setStyleDisplayBtnFormFuncionarioAlterar(String styleDisplayBtnFormFuncionarioAlterar) {
+		this.styleDisplayBtnFormFuncionarioAlterar = styleDisplayBtnFormFuncionarioAlterar;
+	}
+
+	public String getStyleDisplayBtnFormEnderecoCadastrar() {
+		return styleDisplayBtnFormEnderecoCadastrar;
+	}
+
+	public void setStyleDisplayBtnFormEnderecoCadastrar(String styleDisplayBtnFormEnderecoCadastrar) {
+		this.styleDisplayBtnFormEnderecoCadastrar = styleDisplayBtnFormEnderecoCadastrar;
+	}
+
+	public String getStyleDisplayBtnFormEnderecoAlterar() {
+		return styleDisplayBtnFormEnderecoAlterar;
+	}
+
+	public void setStyleDisplayBtnFormEnderecoAlterar(String styleDisplayBtnFormEnderecoAlterar) {
+		this.styleDisplayBtnFormEnderecoAlterar = styleDisplayBtnFormEnderecoAlterar;
 	}
 	
 	

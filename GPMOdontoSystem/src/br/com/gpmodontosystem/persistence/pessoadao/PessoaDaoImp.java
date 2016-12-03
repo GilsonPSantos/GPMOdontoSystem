@@ -80,8 +80,8 @@ public class PessoaDaoImp extends Dao implements IPessoaDao {
 	public void alterar(Pessoa p) throws Exception {
 		open();
 		StringBuilder sql = new StringBuilder();
-		sql.append("UPDATE PESSOA SET PES_CPF = ?, PES_IDENTIDADE = ?, PES_NOME = ?, PES_NASCIMENTO = ?, )");
-		sql.append("PES_SEXO = ?, PES_EMAIL = ?, PES_DDD = ?, PES_CEL = ?, PES_TEL = ? PES_ATUALIZACAO = ?");
+		sql.append("UPDATE PESSOA SET PES_CPF = ?, PES_IDENTIDADE = ?, PES_NOME = ?, PES_NASCIMENTO = ?, ");
+		sql.append("PES_SEXO = ?, PES_EMAIL = ?, PES_DDD = ?, PES_CEL = ?, PES_TEL = ?, PES_ATUALIZACAO = ? ");
 		sql.append("WHERE PES_CODIGO = ?");
 		stmt = con.prepareStatement(sql.toString());
 		stmt.setString(1, p.getCpf());
@@ -94,9 +94,9 @@ public class PessoaDaoImp extends Dao implements IPessoaDao {
 		stmt.setString(7, p.getDdd());
 		stmt.setString(8, p.getCelular());
 		stmt.setString(9, p.getTelefone());
-		stmt.setInt(10, p.getIdPessoa());
-		dataSql = new Date(p.getDataAtualizacao().getTime().getTime());
-		stmt.setDate(11, dataSql);
+		dataSql = new Date(p.getDataAtualizacao().getTimeInMillis());
+		stmt.setDate(10, dataSql);
+		stmt.setInt(11, p.getIdPessoa());
 		stmt.execute();
 		stmt.close();
 	close();
