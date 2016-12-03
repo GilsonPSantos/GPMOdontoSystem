@@ -5,15 +5,18 @@ import java.util.List;
 
 import br.com.gpmodontosystem.model.Funcionario;
 import br.com.gpmodontosystem.model.Paciente;
+import br.com.gpmodontosystem.persistence.enderecodao.IEnderecoDao;
 import br.com.gpmodontosystem.persistence.funcionariodao.FuncionarioDaoImp;
 import br.com.gpmodontosystem.persistence.funcionariodao.IFuncionarioDao;
 import br.com.gpmodontosystem.persistence.pessoadao.IPessoaDao;
 import br.com.gpmodontosystem.persistence.pessoadao.PessoaDaoImp;
+import br.com.gpmodontosystem.service.endereco.IEnderecoService;
 
 public class FuncionarioServiceImp implements IFuncionarioService{
 
 	private IFuncionarioDao funcionarioDao;
 	private IPessoaDao pessoaDao;
+	private IEnderecoDao enderecoDao;
 	
 	public FuncionarioServiceImp() {
 		funcionarioDao = new FuncionarioDaoImp();
@@ -32,14 +35,18 @@ public class FuncionarioServiceImp implements IFuncionarioService{
 
 	@Override
 	public Funcionario consultarPeloId(Funcionario f) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+//		f.getEndereco().setIdEndereco(f.getIdPessoa());
+//		f.setEndereco(enderecoDao.consultarPeloId(f.getEndereco()));
+		return funcionarioDao.consultarPeloId(f);
+		
 	}
 
 	@Override
 	public void alterar(Funcionario f) throws Exception {
-		// TODO Auto-generated method stub
-		
+		pessoaDao = new PessoaDaoImp();
+		Calendar c = Calendar.getInstance();
+		f.setDataAtualizacao(c);
+		pessoaDao.alterar(f);
 	}
 
 	@Override
@@ -50,8 +57,7 @@ public class FuncionarioServiceImp implements IFuncionarioService{
 
 	@Override
 	public List<Funcionario> listarFuncionarios() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return funcionarioDao.listarFuncionarios();
 	}
 	
 

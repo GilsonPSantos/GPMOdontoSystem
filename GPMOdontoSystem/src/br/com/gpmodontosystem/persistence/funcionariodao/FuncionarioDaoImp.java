@@ -29,10 +29,10 @@ public class FuncionarioDaoImp extends Dao implements IFuncionarioDao{
 		StringBuilder sql = new StringBuilder();
 		sql.append("SELECT ");
 		sql.append("PES_CODIGO, PES_CPF, PES_IDENTIDADE, PES_NOME, PES_NASCIMENTO, PES_SEXO, PES_EMAIL,");
-		sql.append("PES_DDD, PES_CEL, PES_TEL FROM FUNCIONARIO F ");
+		sql.append("PES_DDD, PES_CEL, PES_TEL, PES_ATIVO, PES_CADASTRO, PES_ATUALIZACAO FROM FUNCIONARIO F ");
 		sql.append("INNER JOIN PESSOA P ON F.FUN_CODIGO = P.PES_CODIGO WHERE FUN_CODIGO = ?");
-		stmt.setInt(1, f.getIdPessoa());
 		stmt = con.prepareStatement(sql.toString());
+		stmt.setInt(1, f.getIdPessoa());
 		rs = stmt.executeQuery();
 		Funcionario func = null;
 		if(rs.next()){
@@ -44,11 +44,18 @@ public class FuncionarioDaoImp extends Dao implements IFuncionarioDao{
 			Calendar data = Calendar.getInstance();
 			data.setTime(rs.getDate("PES_NASCIMENTO"));
 			func.setDataNascimento(data);
-			func.setSexo(TypeSexo.valueOf("PES_SEXO"));
+			func.setSexo(TypeSexo.valueOf(rs.getString("PES_SEXO")));
 			func.setEmail(rs.getString("PES_EMAIL"));
 			func.setDdd(rs.getString("PES_DDD"));
 			func.setCelular(rs.getString("PES_CEL"));
 			func.setTelefone(rs.getString("PES_TEL"));
+			func.setFlagAtivo(rs.getInt("PES_ATIVO"));
+			data = Calendar.getInstance();
+			data.setTime(rs.getDate("PES_CADASTRO"));
+			func.setDataCadastro(data);
+			data = Calendar.getInstance();
+			data.setTime(rs.getDate("PES_ATUALIZACAO"));
+			func.setDataAtualizacao(data);
 		}
 		stmt.close();
 		rs.close();
@@ -89,7 +96,7 @@ public class FuncionarioDaoImp extends Dao implements IFuncionarioDao{
 				Calendar data = Calendar.getInstance();
 				data.setTime(rs.getDate("PES_NASCIMENTO"));
 				func.setDataNascimento(data);
-				func.setSexo(TypeSexo.valueOf("PES_SEXO"));
+				func.setSexo(TypeSexo.valueOf(rs.getString("PES_SEXO")));
 				func.setEmail(rs.getString("PES_EMAIL"));
 				func.setDdd(rs.getString("PES_DDD"));
 				func.setCelular(rs.getString("PES_CEL"));

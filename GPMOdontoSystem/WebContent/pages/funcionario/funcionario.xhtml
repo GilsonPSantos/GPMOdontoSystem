@@ -10,6 +10,7 @@
 <h:head>
 
 <link rel="stylesheet" href="../../includes/css/master.css"></link>
+<link rel="stylesheet" href="../../includes/font-awesome-4.7.0/css/font-awesome.min.css"></link>
 
 	<script type="text/javascript">
 		
@@ -24,10 +25,10 @@
 	            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],  
 	            dayNamesMin: ['D','S','T','Q','Q','S','S'],  
 	            weekHeader: 'Semana',  
-	            firstDay: 1,  
+	            firstDay: 1,
 	            isRTL: false,  
 	            showMonthAfterYear: false,  
-	            yearSuffix: '',  
+	            yearSuffix: '', 
 	            timeOnlyTitle: 'Só Horas',  
 	            timeText: 'Tempo',  
 	            hourText: 'Hora',  
@@ -74,6 +75,7 @@
 			<h:form id="formEnderecoFunc">
 				<h:inputHidden value="#{mbFuncionario.funcionario.idPessoa}" id="idPessoa"></h:inputHidden>
 				<h:inputHidden value="#{mbFuncionario.funcionario.endereco.cep}"></h:inputHidden>
+				<h:inputHidden value="#{mbFuncionario.funcionario.endereco.idEndereco}"></h:inputHidden>
 				<h:panelGrid columns="3" >
 					
 					<h:panelGrid columns="1">
@@ -111,11 +113,12 @@
 				</h:panelGrid>
 			
 				<p:panel style="text-align:center;">
-					<p:commandButton value="Cadastrar" rendered="#{mbFuncionario.flagCadastroEndereco == true}" action="#{mbFuncionario.cadastrarEndereco}" update=":formEnderecoFunc,:mensagenValidacao"/>	
+					<p:commandButton value="Cadastrar" rendered="#{mbFuncionario.flagCadastroEndereco == true}" action="#{mbFuncionario.cadastrarEndereco}" update=":formEnderecoFunc, :formCadConsFuncionario"/>	
 					<p:commandButton value="Alterar" rendered="#{mbFuncionario.flagCadastroEndereco == false}" action="#{mbFuncionario.alterarEndereco}" update=":formEnderecoFunc,:mensagenValidacao"/>
 					
 					
-					<p:commandButton value="Cancelar" onclick="PF('modalEnd').hide();" update=":formEnderecoFunc, :formBuscaCepFunc" process="@this" action="#{mbFuncionario.cancelarPreenchimentoEndereco}"/>
+					<p:commandButton value="Cancelar" rendered="#{mbFuncionario.flagCadastroEndereco == true}" onclick="PF('modalEnd').hide();" update=":formEnderecoFunc, :formBuscaCepFunc" process="@this" action="#{mbFuncionario.cancelarPreenchimentoEndereco}"/>
+					<p:commandButton value="Fechar" rendered="#{mbFuncionario.flagCadastroEndereco == false}" onclick="PF('modalEnd').hide();"/>
 				</p:panel>
 			</h:form>
 			</p:panel>
@@ -132,7 +135,7 @@
 				<!-- INICIO PAINEL FORM FUNCIONÁRIO -->
 			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12" header="Dados do Funcionário">
 				<h:form id="formCadConsFuncionario">
-				<p:growl></p:growl>
+				<p:growl id="pgrowFormFuncionario"></p:growl>
 				<h:inputHidden value="#{mbFuncionario.funcionario.idPessoa}"></h:inputHidden>
 				<h:panelGrid columns="6">
 					
@@ -152,8 +155,8 @@
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 					Data de Nascimento:
-						<p:calendar locale="pt" value="#{mbFuncionario.funcionario.dataNascimento.time}" id="dataNascimento" title="Data de Nascimento" placeholder="Data de Nascimento">
-							<f:convertDateTime timeZone="GMT-3" type="date" pattern="dd/MM/yyyy" ></f:convertDateTime>
+						<p:calendar locale="pt" mask="true"  pattern="dd/MM/yyyy" navigator="true" yearRange="c-100:c"  value="#{mbFuncionario.funcionario.dataNascimento.time}" id="dataNascimento" title="Data de Nascimento" placeholder="Data de Nascimento">
+<!-- 							<f:convertDateTime  timeZone="GMT-3" type="date" pattern="dd/MM/yyyy" ></f:convertDateTime> -->
 						</p:calendar>
 							<p/>
 					Sexo:
@@ -188,17 +191,19 @@
 						</p:selectOneMenu>
 						<p/>
 						Senha:
-	        			<p:password id="nonFeedback" />
+	        			<p:password id="nonFeedback" value="#{mbFuncionario.funcionario.usuario.senha}" />
 					</h:panelGrid>
 					<h:panelGrid columns="1" border="3" >
-							<p:commandButton style="width:200px;" value="Adicionar Endereço" type="button" onclick="PF('modalEnd').show();"/>
+						<p:commandButton style="width:200px;" rendered="#{mbFuncionario.funcionario.idPessoa == null}" value="Adicionar Endereço" disabled="true" type="button" onclick="PF('modalEnd').show();"/>
+						<p:commandButton style="width:200px;" rendered="#{mbFuncionario.funcionario.idPessoa != null and mbFuncionario.funcionario.endereco.idEndereco == null}" value="#{mbFuncionario.labelBtnModalEnd}" disabled="false" type="button" onclick="PF('modalEnd').show();"/>
+						<p:commandButton style="width:200px;" rendered="#{mbFuncionario.funcionario.idPessoa != null and mbFuncionario.funcionario.endereco.idEndereco != null}" value="#{mbFuncionario.labelBtnModalEnd}" disabled="false" type="button" onclick="PF('modalEnd').show();"/>
 					</h:panelGrid>
 				</h:panelGrid>
 				
 				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
 				<h:panelGrid columns="2">
-					<p:commandButton rendered="#{mbFuncionario.funcionario.idPessoa == null}"  value="Salvar" action="#{mbFuncionario.cadastrarFuncionario}" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc" />
-					<p:commandButton rendered="#{mbFuncionario.funcionario.idPessoa != null}"  value="Salvar" action="#{mbFuncionario.alterarFuncionario}" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc" />
+					<p:commandButton  value="Salvar" rendered="#{mbFuncionario.funcionario.idPessoa == null}" action="#{mbFuncionario.cadastrarFuncionario}" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc, :formTabelaFuncionario" />
+					<p:commandButton  value="Alterar" rendered="#{mbFuncionario.funcionario.idPessoa != null}" action="#{mbFuncionario.cadastrarFuncionario}" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc, :formTabelaFuncionario" />
 					<p:commandButton  value="Cancelar" type="button" />
 				</h:panelGrid>
 			</h:form>
@@ -208,8 +213,8 @@
 			
 			<!-- INICIO PAINEL TABELA LISTA DE FUNCIONÁRIOS-->
 			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela">
-				<h:form>
-					<p:dataTable id="tbl" var="car" value="#{mbFuncionario.listaFuncionario}" 
+				<h:form id="formTabelaFuncionario">
+					<p:dataTable id="tbl" var="funcionario" value="#{mbFuncionario.listaFuncionario}" 
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 						paginator="true" rows="10" style="margin-bottom:20px" emptyMessage="Não possui funcionários cadastrados">
 						<f:facet name="{Exporters}">
@@ -252,11 +257,15 @@
 							<h:outputText value="(#{funcionario.ddd}) #{funcionario.telefone} / #{funcionario.celular}" />
 						</p:column>
 
-						<p:column>
+						<p:column style="text-align:center;">
 							<f:facet name="header">
 								<h:outputText value="Ação" />
 							</f:facet>
-							<h:outputText value="#{car.color}" />
+						<h:inputHidden value="#{funcionario.idPessoa}"></h:inputHidden>
+							<p:commandButton icon="fa fa-pencil" action="#{mbFuncionario.cosultarFuncionario}" title="Cliquei aqui para Editar" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc">
+								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.idPessoa}"></f:setPropertyActionListener>
+							</p:commandButton>
+							<p:commandButton icon="fa fa-trash" type="button" title="Cliquei aqui para Excluir"/>
 						</p:column>
 					</p:dataTable>
 
