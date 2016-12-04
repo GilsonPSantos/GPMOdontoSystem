@@ -70,8 +70,15 @@ public class FuncionarioDaoImp extends Dao implements IFuncionarioDao{
 
 	@Override
 	public void alterar(Funcionario f) throws Exception {
-		// TODO Auto-generated method stub
-		
+		open();
+			String sql = "UPDATE FUNCIONARIO SET FUN_MATRICULA = ?, CARGO_CAR_CODIGO = ? WHERE FUN_CODIGO = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, f.getMatricula());
+			stmt.setInt(2, f.getCargo().getIdCargo());
+			stmt.setInt(3, f.getIdPessoa());
+			stmt.execute();
+			stmt.close();
+		close();
 	}
 
 	@Override

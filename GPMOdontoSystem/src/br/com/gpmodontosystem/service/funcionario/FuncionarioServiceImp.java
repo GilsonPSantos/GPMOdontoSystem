@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.gpmodontosystem.model.Endereco;
 import br.com.gpmodontosystem.model.Funcionario;
-import br.com.gpmodontosystem.model.Paciente;
+import br.com.gpmodontosystem.model.Usuario;
 import br.com.gpmodontosystem.persistence.enderecodao.EnderecoDaoImp;
 import br.com.gpmodontosystem.persistence.enderecodao.IEnderecoDao;
 import br.com.gpmodontosystem.persistence.funcionariodao.FuncionarioDaoImp;
@@ -14,8 +14,6 @@ import br.com.gpmodontosystem.persistence.pessoadao.IPessoaDao;
 import br.com.gpmodontosystem.persistence.pessoadao.PessoaDaoImp;
 import br.com.gpmodontosystem.persistence.usuariodao.IUsuarioDao;
 import br.com.gpmodontosystem.persistence.usuariodao.UsuarioDaoImp;
-import br.com.gpmodontosystem.service.endereco.IEnderecoService;
-import br.com.gpmodontosystem.service.usuario.IUsuarioService;
 import br.com.gpmodontosystem.utilitario.CriptografaSenha;
 
 public class FuncionarioServiceImp implements IFuncionarioService{
@@ -53,11 +51,12 @@ public class FuncionarioServiceImp implements IFuncionarioService{
 	public Funcionario consultarPeloId(Funcionario f) throws Exception {
 		enderecoDao = new EnderecoDaoImp();
 		Endereco e = new Endereco();
+		Usuario u = f.getUsuario();
 		e.setIdEndereco(f.getIdPessoa());
 		e = enderecoDao.consultarPeloId(e);
 		f = funcionarioDao.consultarPeloId(f);
 		f.setEndereco(e);
-		f.setUsuario(f.getUsuario());
+		f.setUsuario(usuarioDao.consultarPeloId(u));
 		return f;
 		
 	}
@@ -68,6 +67,12 @@ public class FuncionarioServiceImp implements IFuncionarioService{
 		Calendar c = Calendar.getInstance();
 		f.setDataAtualizacao(c);
 		pessoaDao.alterar(f);
+		funcionarioDao.alterar(f);
+		f.getUsuario().setIdUsuario(f.getIdPessoa());
+		f.getUsuario().setLogin(f.getCpf());
+		f.getUsuario().setFlagAtivo(0);
+		new CriptografaSenha().criptografarSenha(f.getUsuario());
+		usuarioDao.alterar(f.getUsuario());
 	}
 
 	@Override

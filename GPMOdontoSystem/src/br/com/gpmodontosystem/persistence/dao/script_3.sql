@@ -171,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `USUARIO` (
   `US_CODIGO` INT NOT NULL,
   `US_NOME` VARCHAR(45) NOT NULL,
   `US_SENHA` VARCHAR(45) NOT NULL,
-  `US_NIVEL` TINYINT COMMENT 'Não será implementado nesse primeiro momento\nSerá o nivel de acesso que cada usuario vai ter sobre o sistema\nA ideia inicial é criar uma outra tabela com o id do nivel e a descrição de cada um\n',
+  `US_NIVEL` VARCHAR(4),
   `US_ATIVO` BIT NOT NULL DEFAULT 0,
   PRIMARY KEY (`US_CODIGO`),
   CONSTRAINT `fk_USUARIO_FUNCIONARIO`

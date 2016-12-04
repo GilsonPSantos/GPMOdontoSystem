@@ -43,8 +43,16 @@ public class UsuarioDaoImp extends Dao implements IUsuarioDao {
 
 	@Override
 	public void alterar(Usuario u) throws Exception {
-		// TODO Auto-generated method stub
-		
+		open();
+			String sql = "UPDATE USUARIO SET US_NOME = ?, US_SENHA = ?, US_NIVEL = ? WHERE US_CODIGO = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, u.getLogin());
+			stmt.setString(2, u.getSenha());
+			stmt.setString(3, u.getNivelPermissao());
+			stmt.setInt(4, u.getIdUsuario());
+			stmt.execute();
+			stmt.close();
+		close();
 	}
 
 	@Override
