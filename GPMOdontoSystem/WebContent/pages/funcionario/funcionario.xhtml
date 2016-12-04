@@ -277,12 +277,12 @@
 						<f:facet name="{Exporters}">
 							<h:commandLink>
 								<p:graphicImage value="/img/excel.png" width="24px"/>
-								<p:dataExporter type="xls" target="tbl" fileName="cars" />
+								<p:dataExporter type="xls" target="tbl" fileName="Lista_Funcionarios" />
 							</h:commandLink>
 
 							<h:commandLink>
 								<p:graphicImage value="img/pdf.png" width="24px"/>
-								<p:dataExporter type="pdf" target="tbl" fileName="cars" />
+								<p:dataExporter type="pdf" target="tbl" fileName="Lista_Funcionarios" />
 							</h:commandLink>
 						</f:facet>
 
@@ -314,7 +314,7 @@
 							<h:outputText value="(#{funcionario.ddd}) #{funcionario.telefone} / #{funcionario.celular}" />
 						</p:column>
 
-						<p:column style="text-align:center;">
+						<p:column style="text-align:center;" exportable="false">
 							<f:facet name="header">
 								<h:outputText value="Ação" />
 							</f:facet>
