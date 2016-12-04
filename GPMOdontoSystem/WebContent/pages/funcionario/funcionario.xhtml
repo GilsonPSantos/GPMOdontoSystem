@@ -61,10 +61,19 @@
 				<h:panelGrid columns="1">
 					<h:panelGrid columns="2">
 						<h:panelGrid columns="1">
-							<p:inputText value="#{mbFuncionario.funcionario.endereco.cep}" title="Digite um Cep e clique em Buscar CEP" placeholder="Digite o CEP"/>
+							<p:inputText value="#{mbFuncionario.funcionario.endereco.cep}" 
+										title="Digite um Cep e clique em Buscar CEP" 
+										placeholder="Digite o CEP" id="msgCep"
+										required="true" type="text" maxlength="8" 
+										requiredMessage="O CPF é obrigatório"
+										validatorMessage="Digite o CEP no padrão correto: (Números, máximo de 8)"
+										>
+										<f:validateRegex pattern="[0-9]{0,8}" for="msgCep"></f:validateRegex>
+										</p:inputText>
 						</h:panelGrid>
 						<h:panelGrid columns="1">
-							<p:commandButton value="Buscar CEP" action="#{mbFuncionario.buscarCep}" ajax="true" update=":formEnderecoFunc,:formBuscaCepFunc" />
+							<p:commandButton value="Buscar CEP" action="#{mbFuncionario.buscarCep}" 
+											ajax="true" update=":formEnderecoFunc,:formBuscaCepFunc" />
 						</h:panelGrid>
 					</h:panelGrid>
 				</h:panelGrid>
@@ -81,36 +90,49 @@
 					
 					<h:panelGrid columns="1">
 							Logradouro:
-							<p:inputText size="50" value="#{mbFuncionario.funcionario.endereco.logradouro}" title="Logradouro do funcionário" type="text" placeholder="Logradouro"/>
+							<p:inputText size="50" value="#{mbFuncionario.funcionario.endereco.logradouro}" 
+										title="Logradouro do funcionário" type="text" 
+										placeholder="Logradouro" required="true" 
+										requiredMessage="O Logradouro é obrigatório"
+										maxlength="80" />
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1">
 							N.º:
-							<p:inputText size="7" value="#{mbFuncionario.funcionario.endereco.numero}" title="Número" type="number" placeholder="N.º"/>
+							<p:inputText size="7" value="#{mbFuncionario.funcionario.endereco.numero}" 
+										title="Número" type="number" placeholder="N.º"
+										required="true" requiredMessage="O número é obrigatório"
+										validatorMessage="O campo número deve conter até 6 números">
+										<f:validateLength minimum="0" maximum="6"></f:validateLength>
+										</p:inputText>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							Complemento:
-							<p:inputText size="20" value="#{mbFuncionario.funcionario.endereco.complemento}" title="Didite um complemento" type="text" placeholder="Complemento"/>
+							<p:inputText size="20" value="#{mbFuncionario.funcionario.endereco.complemento}" 
+										title="Didite um complemento" type="text" placeholder="Complemento"
+										maxlength="30"/>
 					</h:panelGrid>
 				</h:panelGrid>
 				<h:panelGrid columns="4" >
 					<h:panelGrid columns="1">
 							Bairro:
-							<p:inputText size="20" value="#{mbFuncionario.funcionario.endereco.bairro}" title="Digite o bairro do funcionário" type="email" placeholder="Bairro"/>
+							<p:inputText size="20" value="#{mbFuncionario.funcionario.endereco.bairro}" 
+										title="Digite o bairro do funcionário" type="text" placeholder="Bairro"
+										maxlength="30"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 							Cidade:
-							<p:inputText size="25" value="#{mbFuncionario.funcionario.endereco.cidade}" title="Digite a cidade do funcionário" type="email" placeholder="Cidade"/>
+							<p:inputText size="25" value="#{mbFuncionario.funcionario.endereco.cidade}" 
+										title="Digite a cidade do funcionário" type="text" placeholder="Cidade"
+										maxlength="30"/>
 					</h:panelGrid>
 					
 					<h:panelGrid columns="1">
 							UF:
-							<p:inputText size="7" value="#{mbFuncionario.funcionario.endereco.uf}" title="Digite o estado do funcionário" type="email" placeholder="UF"/>
+							<p:inputText size="7" value="#{mbFuncionario.funcionario.endereco.uf}" 
+										title="Digite o estado do funcionário" type="text" placeholder="UF"
+										maxlength="2"/>
 					</h:panelGrid>
-<!-- 					<h:panelGrid columns="1"> -->
-<!-- 							País: -->
-<!-- 							<p:inputText size="20" value="" title="Digite o país do funcionário" type="email" placeholder="País"/> -->
-<!-- 					</h:panelGrid> -->
 				</h:panelGrid>
 			
 				<p:panel>
@@ -147,17 +169,29 @@
 					
 					<h:panelGrid columns="1">
 					Nome:
-						<p:inputText value="#{mbFuncionario.funcionario.nomePessoa}" title="Nome do Paciente" placeholder="Nome"/>
+						<p:inputText value="#{mbFuncionario.funcionario.nomePessoa}" title="Nome do Paciente" 
+									placeholder="Nome" required="true" requiredMessage="O campo Nome é obrigatório"
+									maxlength="80" type="text"/>
 						<p/>
 					Email:
-						<p:inputText value="#{mbFuncionario.funcionario.email}" title="Email do Paciente" type="email" placeholder="Email"/>
+						<p:inputText value="#{mbFuncionario.funcionario.email}" title="Email do Paciente" 
+									type="text" placeholder="Email" required="true" 
+									requiredMessage="O campo E-mail é obrigatório" maxlength="45" 
+									/>
+									
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 					CPF:
-						<p:inputText value="#{mbFuncionario.funcionario.cpf}" title="CPF do Paciente" maxlength="15" size="12" type="" placeholder="CPF"/>
+						<p:inputText value="#{mbFuncionario.funcionario.cpf}" title="CPF do Paciente" 
+									maxlength="11" size="12" type="text" placeholder="CPF"
+									validatorMessage="No campo CPF digite apenas números (de 0 a 11)"
+									>
+									<f:validateRegex pattern="[0-9][0,11]"></f:validateRegex>
+									</p:inputText>
 						<p/>
 					Identidade:
-						<p:inputText value="#{mbFuncionario.funcionario.identidade}" title="Identidade do Paciente" size="12" type="" placeholder="Identidade"/>
+						<p:inputText value="#{mbFuncionario.funcionario.identidade}" title="Identidade do Paciente" 
+									size="12" type="text" placeholder="Identidade" maxlength="9"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 					Data de Nascimento:
@@ -166,7 +200,9 @@
 						</p:calendar>
 							<p/>
 					Sexo:
-					        <p:selectOneRadio id="sexo" value="#{mbFuncionario.funcionario.sexo}" label="Sexo">
+					        <p:selectOneRadio id="sexo" value="#{mbFuncionario.funcionario.sexo}" 
+					        					label="Sexo" required="true"
+					        					requiredMessage="O campo sexo é obrigatório">
 					            <f:selectItem itemLabel="Masculino" itemValue="M" />
 					            <f:selectItem itemLabel="Feminino" itemValue="F" />
 					        </p:selectOneRadio>
@@ -176,26 +212,41 @@
 					
 					Telefone:
 						<h:panelGrid columns="2">
-								<p:inputText value="#{mbFuncionario.funcionario.ddd}" title="Digite o DDD" type="text" size="3" maxlength="2" placeholder="DDD"/>
-								<p:inputText maxlength="9" size="10" value="#{mbFuncionario.funcionario.telefone}" title="Digite o Tel" type="" placeholder="Telefone"/>
+								<p:inputText value="#{mbFuncionario.funcionario.ddd}" title="Digite o DDD" 
+											type="text" size="3" maxlength="2" placeholder="DDD"
+											validatorMessage="No campo DDD digite apenas números">
+											<f:validateRegex pattern="[0-9]{0,2}"></f:validateRegex>
+											</p:inputText>
+								<p:inputText maxlength="8" size="10" value="#{mbFuncionario.funcionario.telefone}" 
+											title="Digite o Tel" type="text" placeholder="Telefone"
+											validatorMessage="No campo telefone digite apenas números">
+											<f:validateRegex pattern="[0-9]{0,8}"></f:validateRegex>
+											</p:inputText>
 						</h:panelGrid>
 					<p/>
 					Celular:
 						<h:panelGrid columns="2">
 <!-- 								<p:inputText value="" title="Digite o DDD" type="text" size="3" maxlength="2" placeholder="DDD"/> -->
-								<p:inputText value="#{mbFuncionario.funcionario.celular}" title="Digite o Cel" type="" size="10" placeholder="Celular"/>
+								<p:inputText value="#{mbFuncionario.funcionario.celular}" title="Digite o Cel" 
+											type="text" size="10" maxlength="9" placeholder="Celular"
+											validatorMessage="No campo celular digite apenas números">
+											<f:validateRegex pattern="[0-9]{0,9}"></f:validateRegex>
+											</p:inputText>
 						</h:panelGrid>
 						
 					</h:panelGrid>
 					<h:panelGrid columns="1" >
 						Cargo:
-						<p:selectOneMenu value="#{mbFuncionario.funcionario.cargo.idCargo}">
+						<p:selectOneMenu value="#{mbFuncionario.funcionario.cargo.idCargo}" required="true"
+										requiredMessage="O campo cargo é obrigatório">
 							<f:selectItem itemLabel="Selecione um Cargo" itemValue="" />
 							<f:selectItems value="#{mbFuncionario.listaCargo}" var="cargo" itemLabel="#{cargo.nomeCargo}" itemValue="#{cargo.idCargo}"></f:selectItems>
 						</p:selectOneMenu>
 						<p/>
 						Senha:
-	        			<p:password id="nonFeedback" value="#{mbFuncionario.funcionario.usuario.senha}" />
+	        			<p:password id="nonFeedback" value="#{mbFuncionario.funcionario.usuario.senha}" 
+	        						required="true" requiredMessage="O campo senha é obrigatório"
+	        						maxlength="45"/>
 					</h:panelGrid>
 					<h:panelGrid columns="1" border="3" >
 						<p:commandButton style="width:200px;" rendered="#{mbFuncionario.funcionario.idPessoa == null}" value="Adicionar Endereço" disabled="true" type="button" onclick="PF('modalEnd').show();"/>
