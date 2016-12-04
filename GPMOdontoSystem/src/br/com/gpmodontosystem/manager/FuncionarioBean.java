@@ -2,19 +2,13 @@ package br.com.gpmodontosystem.manager;
 
 import java.io.Serializable;
 import java.util.Calendar;
-import java.util.EventListener;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.component.UICommand;
-import javax.faces.component.UIInput;
-import javax.faces.component.html.HtmlCommandButton;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
-import javax.faces.event.MethodExpressionActionListener;
 
 import br.com.gpmodontosystem.model.Endereco;
 import br.com.gpmodontosystem.model.Funcionario;
@@ -71,6 +65,7 @@ public class FuncionarioBean implements Serializable{
 			styleDisplayBtnFormFuncionarioAlterar = "block";
 			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionário cadastrado com sucesso."));
 		} catch (Exception e) {
+			labelBtnModalEnd = "Adicionar Endereço";
 			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao cadastrar o Funcionário."));
 			e.printStackTrace();
 		}
@@ -88,6 +83,7 @@ public class FuncionarioBean implements Serializable{
 			styleDisplayBtnFormEnderecoAlterar = "block";
 			
 		} catch (Exception e) {
+			labelBtnModalEnd = "Adicionar Endereço";
 			styleDisplayBtnFormFuncionarioCadastrar = "block";
 			styleDisplayBtnFormFuncionarioAlterar = "none";
 			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao consultar o Funcionário."));
@@ -144,6 +140,39 @@ public class FuncionarioBean implements Serializable{
 			styleDisplayBtnFormEnderecoAlterar = "none";
 			e.printStackTrace();
 			fc.addMessage("pgrowlBuscaCep", new FacesMessage("Ocorreu um erro interno ao cadastrar o endereço."));
+		}
+	}
+	
+	public void alterarEndereco(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		try {
+			enderecoService = new EnderecoServiceImpl();
+			enderecoService.alterar(funcionario);
+			
+			styleDisplayBtnFormEnderecoCadastrar = "none";
+			styleDisplayBtnFormEnderecoAlterar = "block";
+			labelBtnModalEnd = "Consultar Endereço";
+			fc.addMessage("pgrowlFormEnd", new FacesMessage("Endereço alterado com sucesso."));
+			
+		} catch (Exception e) {
+			styleDisplayBtnFormEnderecoCadastrar = "none";
+			styleDisplayBtnFormEnderecoAlterar = "block";
+			e.printStackTrace();
+			fc.addMessage("pgrowlFormEnd", new FacesMessage("Ocorreu um erro interno ao alterar o endereço."));
+		}
+	}
+	
+	public void deleterFuncionario(){
+		FacesContext fc = FacesContext.getCurrentInstance();
+		try {
+			enderecoService = new EnderecoServiceImpl();
+			enderecoService.deletar(funcionario);
+			funcionarioService.deletar(funcionario);
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionário excluído com sucesso."));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao excluir o Funcionário."));
 		}
 	}
 	

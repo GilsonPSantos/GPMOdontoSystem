@@ -3,8 +3,10 @@ package br.com.gpmodontosystem.service.funcionario;
 import java.util.Calendar;
 import java.util.List;
 
+import br.com.gpmodontosystem.model.Endereco;
 import br.com.gpmodontosystem.model.Funcionario;
 import br.com.gpmodontosystem.model.Paciente;
+import br.com.gpmodontosystem.persistence.enderecodao.EnderecoDaoImp;
 import br.com.gpmodontosystem.persistence.enderecodao.IEnderecoDao;
 import br.com.gpmodontosystem.persistence.funcionariodao.FuncionarioDaoImp;
 import br.com.gpmodontosystem.persistence.funcionariodao.IFuncionarioDao;
@@ -35,12 +37,16 @@ public class FuncionarioServiceImp implements IFuncionarioService{
 
 	@Override
 	public Funcionario consultarPeloId(Funcionario f) throws Exception {
-//		f.getEndereco().setIdEndereco(f.getIdPessoa());
-//		f.setEndereco(enderecoDao.consultarPeloId(f.getEndereco()));
-		return funcionarioDao.consultarPeloId(f);
+		enderecoDao = new EnderecoDaoImp();
+		Endereco e = new Endereco();
+		e.setIdEndereco(f.getIdPessoa());
+		e = enderecoDao.consultarPeloId(e);
+		f = funcionarioDao.consultarPeloId(f);
+		f.setEndereco(e);
+		return f;
 		
 	}
-
+	
 	@Override
 	public void alterar(Funcionario f) throws Exception {
 		pessoaDao = new PessoaDaoImp();
@@ -51,8 +57,7 @@ public class FuncionarioServiceImp implements IFuncionarioService{
 
 	@Override
 	public void deletar(Funcionario f) throws Exception {
-		// TODO Auto-generated method stub
-		
+		funcionarioDao.deletar(f);
 	}
 
 	@Override

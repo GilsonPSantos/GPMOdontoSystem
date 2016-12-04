@@ -69,6 +69,10 @@ public List<Paciente> listarPacientesPeloNomeCpfEmail(String nome) throws Except
 		pc.setIdPessoa(rs.getInt("PAC_CODIGO"));
 		lst.add(pc);
 	}
+	if(lst.isEmpty()){
+		pc = new Paciente();
+		lst.add(pc);
+	}
 	stmt.close();
 	rs.close();
 	close();

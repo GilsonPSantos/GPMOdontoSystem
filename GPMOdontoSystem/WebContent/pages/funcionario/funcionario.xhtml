@@ -73,6 +73,7 @@
 		</h:form>
 			
 			<h:form id="formEnderecoFunc">
+			<p:growl id="pgrowlFormEnd"></p:growl>
 				<h:inputHidden value="#{mbFuncionario.funcionario.idPessoa}" id="idPessoa"></h:inputHidden>
 				<h:inputHidden value="#{mbFuncionario.funcionario.endereco.cep}"></h:inputHidden>
 				<h:inputHidden value="#{mbFuncionario.funcionario.endereco.idEndereco}"></h:inputHidden>
@@ -118,7 +119,7 @@
 				
 				<h:panelGrid columns="4" style="text-align:center;">
 					<p:commandButton value="Cadastrar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoCadastrar};" action="#{mbFuncionario.cadastrarEndereco}" update=":formEnderecoFunc, :formCadConsFuncionario"/>	
-					<p:commandButton value="Alterar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoAlterar};" action="#{mbFuncionario.alterarEndereco}" update=":formEnderecoFunc,:mensagenValidacao"/>
+					<p:commandButton value="Alterar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoAlterar};" action="#{mbFuncionario.alterarEndereco}" update=":formEnderecoFunc"/>
 					
 					
 					<p:commandButton value="Cancelar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoCadastrar};" onclick="PF('modalEnd').hide();" update=":formEnderecoFunc, :formBuscaCepFunc" process="@this" action="#{mbFuncionario.cancelarPreenchimentoEndereco}"/>
@@ -220,6 +221,7 @@
 			<!-- INICIO PAINEL TABELA LISTA DE FUNCIONÁRIOS-->
 			<p:panel styleClass="ui-g-12 ui-md-12 ui-lg-12 cortela">
 				<h:form id="formTabelaFuncionario">
+				<p:growl id="pgrowFormTabelaFunc"></p:growl>
 					<p:dataTable id="tbl" var="funcionario" value="#{mbFuncionario.listaFuncionario}" 
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 						paginator="true" rows="10" style="margin-bottom:20px" emptyMessage="Não possui funcionários cadastrados">
@@ -271,7 +273,10 @@
 							<p:commandButton icon="fa fa-pencil" action="#{mbFuncionario.cosultarFuncionario}" title="Cliquei aqui para Editar" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc">
 								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.idPessoa}"></f:setPropertyActionListener>
 							</p:commandButton>
-							<p:commandButton icon="fa fa-trash" type="button" title="Cliquei aqui para Excluir"/>
+							<p:commandButton icon="fa fa-trash" action="#{mbFuncionario.deleterFuncionario}" title="Cliquei aqui para Excluir" update=":formTabelaFuncionario">
+								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.idPessoa}"></f:setPropertyActionListener>
+								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.endereco.idEndereco}"></f:setPropertyActionListener>
+							</p:commandButton>
 						</p:column>
 					</p:dataTable>
 

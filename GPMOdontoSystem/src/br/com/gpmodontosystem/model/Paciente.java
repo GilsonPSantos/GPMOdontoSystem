@@ -18,7 +18,11 @@ public class Paciente extends Pessoa{
 	
 	@Override
 	public String toString() {
-		return "" + getNomePessoa();
+		if(this.getNomePessoa()!= null){
+			return "" + getNomePessoa();
+		}else{
+			return "Não encontrado";
+		}
 	}
 
 

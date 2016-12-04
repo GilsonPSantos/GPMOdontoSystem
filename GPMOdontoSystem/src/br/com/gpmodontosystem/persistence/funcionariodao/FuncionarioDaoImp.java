@@ -71,8 +71,13 @@ public class FuncionarioDaoImp extends Dao implements IFuncionarioDao{
 
 	@Override
 	public void deletar(Funcionario f) throws Exception {
-		// TODO Auto-generated method stub
-		
+		open();
+			String sql = "UPDATE PESSOA SET PES_ATIVO = 1 WHERE PES_CODIGO = ?";
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, f.getIdPessoa());
+			stmt.execute();
+			stmt.close();
+		close();
 	}
 
 	@Override
@@ -82,7 +87,7 @@ public class FuncionarioDaoImp extends Dao implements IFuncionarioDao{
 			sql.append("SELECT ");
 			sql.append("PES_CODIGO, PES_CPF, PES_IDENTIDADE, PES_NOME, PES_NASCIMENTO, PES_SEXO, PES_EMAIL,");
 			sql.append("PES_DDD, PES_CEL, PES_TEL FROM FUNCIONARIO F ");
-			sql.append("INNER JOIN PESSOA P ON F.FUN_CODIGO = P.PES_CODIGO");
+			sql.append("INNER JOIN PESSOA P ON F.FUN_CODIGO = P.PES_CODIGO WHERE P.PES_ATIVO = 0");
 			stmt = con.prepareStatement(sql.toString());
 			rs = stmt.executeQuery();
 			Funcionario func = null;

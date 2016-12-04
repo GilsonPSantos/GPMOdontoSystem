@@ -33,6 +33,8 @@ public class EnderecoServiceImpl implements IEnderecoService{
 
 	@Override
 	public void alterar(Pessoa p) throws Exception {
+		Calendar c = Calendar.getInstance();
+		p.getEndereco().setDataAtualizacao(c);
 		enderecoDao.alterar(p.getEndereco());
 	}
 

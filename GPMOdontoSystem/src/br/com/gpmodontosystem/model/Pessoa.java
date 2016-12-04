@@ -70,7 +70,11 @@ public class Pessoa {
 
 	@Override
 	public String toString() {
-		return ""+ nomePessoa;
+		if(this.nomePessoa!= null){
+			return "" + this.nomePessoa;
+		}else{
+			return "Nenhum paciente encontrado";
+		}
 	}
 
 	public Integer getIdPessoa() {
