@@ -10,9 +10,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import br.com.gpmodontosystem.model.Cargo;
 import br.com.gpmodontosystem.model.Endereco;
 import br.com.gpmodontosystem.model.Funcionario;
 import br.com.gpmodontosystem.model.Usuario;
+import br.com.gpmodontosystem.service.cargo.CargoServiceImp;
+import br.com.gpmodontosystem.service.cargo.ICargoService;
 import br.com.gpmodontosystem.service.endereco.EnderecoServiceImpl;
 import br.com.gpmodontosystem.service.endereco.IEnderecoService;
 import br.com.gpmodontosystem.service.funcionario.FuncionarioServiceImp;
@@ -27,12 +30,15 @@ public class FuncionarioBean implements Serializable{
 	private Funcionario funcionario;
 	private List<Funcionario> listaFuncionario;
 	
+	private List<Cargo> listaCargo;
+	
 	private boolean flagCadastroEndereco = true;
 	private boolean flagCadastroFuncionario = true;
 	private String labelBtnModalEnd;
 	
 	private IFuncionarioService funcionarioService;
 	private IEnderecoService enderecoService;
+	private ICargoService cargoService;
 	
 	private String styleDisplayBtnFormFuncionarioCadastrar;
 	private String styleDisplayBtnFormFuncionarioAlterar;
@@ -45,6 +51,7 @@ public class FuncionarioBean implements Serializable{
 		funcionario = new Funcionario();
 		funcionario.setEndereco(new Endereco());
 		funcionario.setUsuario(new Usuario());
+		funcionario.setCargo(new Cargo());
 		Calendar c = Calendar.getInstance();
 		funcionario.setDataNascimento(c);
 		
@@ -271,6 +278,21 @@ public class FuncionarioBean implements Serializable{
 
 	public void setStyleDisplayBtnFormEnderecoAlterar(String styleDisplayBtnFormEnderecoAlterar) {
 		this.styleDisplayBtnFormEnderecoAlterar = styleDisplayBtnFormEnderecoAlterar;
+	}
+
+	public List<Cargo> getListaCargo() {
+		FacesContext fc = FacesContext.getCurrentInstance();
+		cargoService = new CargoServiceImp();
+		try {
+			listaCargo = cargoService.listarCargos();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listaCargo;
+	}
+
+	public void setListaCargo(List<Cargo> listaCargo) {
+		this.listaCargo = listaCargo;
 	}
 	
 	

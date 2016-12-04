@@ -19,7 +19,7 @@ public class EnderecoDaoImp extends Dao implements IEnderecoDao {
 			sql.append("INSERT INTO ENDERECO (END_CODIGO,END_CEP, END_LOGRADOURO, END_NUMERO, END_COMPLEMENTO, ");
 			sql.append("END_BAIRRO, END_CIDADE, END_UF, END_ATIVO, END_CADASTRO, END_ATUALIZACAO) ");
 			sql.append("VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			stmt = con.prepareStatement(sql.toString() , Statement.RETURN_GENERATED_KEYS);
+			stmt = con.prepareStatement(sql.toString());
 			stmt.setInt(1, e.getIdEndereco());
 			stmt.setString(2, e.getCep());
 			stmt.setString(3, e.getLogradouro());
@@ -32,11 +32,7 @@ public class EnderecoDaoImp extends Dao implements IEnderecoDao {
 			stmt.setDate(10, new Date(e.getDataCadastro().getTimeInMillis()));
 			stmt.setDate(11, new Date(e.getDataAtualizacao().getTimeInMillis()));
 			stmt.execute();
-			rs = stmt.getGeneratedKeys();
-			rs.next();
-			e.setIdEndereco(rs.getInt(1));
 			stmt.close();
-			rs.close();
 		close();
 	}
 

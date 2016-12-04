@@ -7,6 +7,7 @@ public class Funcionario extends Pessoa {
 	private String matricula;
 	private Usuario usuario;
 	private TypeFuncionario tipoFuncionario;
+	private Cargo cargo;
 	
 	public Funcionario() {
 	}
@@ -50,6 +51,14 @@ public class Funcionario extends Pessoa {
 
 	public void setTipoFuncionario(TypeFuncionario tipoFuncionario) {
 		this.tipoFuncionario = tipoFuncionario;
+	}
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
 	}
 	
 }

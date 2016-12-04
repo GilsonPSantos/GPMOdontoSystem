@@ -7,7 +7,7 @@ public class Usuario {
 	private Integer idUsuario;
 	private String login;
 	private String senha;
-	private Integer nivelPermissao;
+	private String nivelPermissao;
 	private Integer flagAtivo; //0-INATIVO, 1-ATIVO
 	private Calendar dataCadastro;
 	private Calendar dataAtualizacao;
@@ -25,7 +25,7 @@ public class Usuario {
 	 * @param dataCadastro
 	 * @param dataAtualizacao
 	 */
-	public Usuario(Integer idUsuario, String login, String senha, Integer nivelPermissao, Integer flagAtivo,
+	public Usuario(Integer idUsuario, String login, String senha, String nivelPermissao, Integer flagAtivo,
 			Calendar dataCadastro, Calendar dataAtualizacao) {
 		super();
 		this.idUsuario = idUsuario;
@@ -68,11 +68,11 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Integer getNivelPermissao() {
+	public String getNivelPermissao() {
 		return nivelPermissao;
 	}
 
-	public void setNivelPermissao(Integer nivelPermissao) {
+	public void setNivelPermissao(String nivelPermissao) {
 		this.nivelPermissao = nivelPermissao;
 	}
 

@@ -118,7 +118,7 @@
 				<div class="ui-g-12 ui-md-12 ui-lg-4"></div>
 				
 				<h:panelGrid columns="4" style="text-align:center;">
-					<p:commandButton value="Cadastrar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoCadastrar};" action="#{mbFuncionario.cadastrarEndereco}" update=":formEnderecoFunc, :formCadConsFuncionario"/>	
+					<p:commandButton value="Cadastrar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoCadastrar};" action="#{mbFuncionario.cadastrarEndereco}" update=":formEnderecoFunc"/>	
 					<p:commandButton value="Alterar" style="display:#{mbFuncionario.styleDisplayBtnFormEnderecoAlterar};" action="#{mbFuncionario.alterarEndereco}" update=":formEnderecoFunc"/>
 					
 					
@@ -189,11 +189,9 @@
 					</h:panelGrid>
 					<h:panelGrid columns="1" >
 						Cargo:
-						<p:selectOneMenu >
+						<p:selectOneMenu value="#{mbFuncionario.funcionario.cargo.idCargo}">
 							<f:selectItem itemLabel="Selecione um Cargo" itemValue="" />
-							<f:selectItem itemLabel="Secretaria" itemValue="1" />
-							<f:selectItem itemLabel="Auxiliar" itemValue="2" />
-							<f:selectItem itemLabel="Atendente" itemValue="3" />
+							<f:selectItems value="#{mbFuncionario.listaCargo}" var="cargo" itemLabel="#{cargo.nomeCargo}" itemValue="#{cargo.idCargo}"></f:selectItems>
 						</p:selectOneMenu>
 						<p/>
 						Senha:
@@ -248,7 +246,7 @@
 							<f:facet name="header">
 								<h:outputText value="Cargo" />
 							</f:facet>
-							<h:outputText value="#{funcionario.tipoFuncionario}" />
+							<h:outputText value="#{funcionario.cargo.nomeCargo}" />
 						</p:column>
 
 						<p:column>
@@ -272,10 +270,12 @@
 						<h:inputHidden value="#{funcionario.idPessoa}"></h:inputHidden>
 							<p:commandButton icon="fa fa-pencil" action="#{mbFuncionario.cosultarFuncionario}" title="Cliquei aqui para Editar" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc">
 								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.idPessoa}"></f:setPropertyActionListener>
+								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.usuario.idUsuario}"></f:setPropertyActionListener>
 							</p:commandButton>
 							<p:commandButton icon="fa fa-trash" action="#{mbFuncionario.deleterFuncionario}" title="Cliquei aqui para Excluir" update=":formTabelaFuncionario">
 								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.idPessoa}"></f:setPropertyActionListener>
 								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.endereco.idEndereco}"></f:setPropertyActionListener>
+								<f:setPropertyActionListener value="#{funcionario.idPessoa}" target="#{mbFuncionario.funcionario.usuario.idUsuario}"></f:setPropertyActionListener>
 							</p:commandButton>
 						</p:column>
 					</p:dataTable>
