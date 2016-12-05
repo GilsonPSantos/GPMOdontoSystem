@@ -166,10 +166,9 @@
 				<p:growl id="pgrowFormFuncionario"></p:growl>
 				<h:inputHidden value="#{mbFuncionario.funcionario.idPessoa}"></h:inputHidden>
 				<h:panelGrid columns="6">
-					
 					<h:panelGrid columns="1">
 					Nome:
-						<p:inputText value="#{mbFuncionario.funcionario.nomePessoa}" title="Nome do Paciente" 
+						<p:inputText id="nomeFunc" value="#{mbFuncionario.funcionario.nomePessoa}" title="Nome do Paciente" 
 									placeholder="Nome" required="true" requiredMessage="O campo Nome é obrigatório"
 									maxlength="80" type="text"/>
 						<p/>
@@ -182,11 +181,11 @@
 					</h:panelGrid>
 					<h:panelGrid columns="1">
 					CPF:
-						<p:inputText value="#{mbFuncionario.funcionario.cpf}" title="CPF do Paciente" 
+						<p:inputText value="#{mbFuncionario.funcionario.cpf}" id="cpf" title="CPF do Paciente" 
 									maxlength="11" size="12" type="text" placeholder="CPF"
 									validatorMessage="No campo CPF digite apenas números (de 0 a 11)"
 									>
-									<f:validateRegex pattern="[0-9][0,11]"></f:validateRegex>
+									<f:validateRegex pattern="[0-9]{0,11}"  ></f:validateRegex>
 									</p:inputText>
 						<p/>
 					Identidade:
@@ -237,8 +236,8 @@
 					</h:panelGrid>
 					<h:panelGrid columns="1" >
 						Cargo:
-						<p:selectOneMenu value="#{mbFuncionario.funcionario.cargo.idCargo}" required="true"
-										requiredMessage="O campo cargo é obrigatório">
+						<p:selectOneMenu value="#{mbFuncionario.funcionario.cargo.idCargo}" required="true" id="cargoFunc"
+										requiredMessage="O campo cargo é obrigatório" >
 							<f:selectItem itemLabel="Selecione um Cargo" itemValue="" />
 							<f:selectItems value="#{mbFuncionario.listaCargo}" var="cargo" itemLabel="#{cargo.nomeCargo}" itemValue="#{cargo.idCargo}"></f:selectItems>
 						</p:selectOneMenu>
@@ -246,7 +245,7 @@
 						Senha:
 	        			<p:password id="nonFeedback" value="#{mbFuncionario.funcionario.usuario.senha}" 
 	        						required="true" requiredMessage="O campo senha é obrigatório"
-	        						maxlength="45"/>
+	        						maxlength="45"  />
 					</h:panelGrid>
 					<h:panelGrid columns="1" border="3" >
 						<p:commandButton style="width:200px;" rendered="#{mbFuncionario.funcionario.idPessoa == null}" value="Adicionar Endereço" disabled="true" type="button" onclick="PF('modalEnd').show();"/>
@@ -257,9 +256,14 @@
 				
 				<div class="ui-g-12 ui-md-12 ui-lg-5"></div>
 				<h:panelGrid columns="3">
-					<p:commandButton  value="Salvar" style="display:#{mbFuncionario.styleDisplayBtnFormFuncionarioCadastrar};" action="#{mbFuncionario.cadastrarFuncionario}" update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc, :formTabelaFuncionario" />
+					<p:commandButton  value="Salvar" style="display:#{mbFuncionario.styleDisplayBtnFormFuncionarioCadastrar};" 
+									action="#{mbFuncionario.cadastrarFuncionario}" 
+									update=":formCadConsFuncionario, :formEnderecoFunc, :formBuscaCepFunc, :formTabelaFuncionario" />
 
-					<p:commandButton  value="Alterar" style="display:#{mbFuncionario.styleDisplayBtnFormFuncionarioAlterar};" action="#{mbFuncionario.alterarFuncionario}" update=":formCadConsFuncionario, :formTabelaFuncionario" />
+					<p:commandButton  value="Alterar" style="display:#{mbFuncionario.styleDisplayBtnFormFuncionarioAlterar};" 
+									action="#{mbFuncionario.alterarFuncionario}" 
+									update=":formCadConsFuncionario:pgrowFormFuncionario,formCadConsFuncionario:cargoFunc, :formTabelaFuncionario" >
+					</p:commandButton>
 					<p:button  value="Cancelar" href="../../index.jsf" />
 				</h:panelGrid>	
 			</h:form>

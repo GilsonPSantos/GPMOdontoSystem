@@ -7,6 +7,7 @@ import br.com.gpmodontosystem.type.TypeSexo;
 public class Pessoa {
 	
 	private Integer idPessoa;
+	
 	private String cpf;
 	private String identidade;
 	private String nomePessoa;
