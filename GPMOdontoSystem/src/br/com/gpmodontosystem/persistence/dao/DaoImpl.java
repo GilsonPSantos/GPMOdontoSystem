@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class Dao implements IDao {
+public class DaoImpl implements IDao {
 	
 	protected Connection con;
 	protected PreparedStatement stmt;
@@ -14,7 +14,7 @@ public class Dao implements IDao {
 	@Override
 	public void open() throws Exception{
 		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BDODONTOSYSTEM", "root", "");
+		con = DriverManager.getConnection("jdbc:mysql://localhost:3306/BDODONTOSYSTEM", "root", "coti");
 	}
 	
 	@Override

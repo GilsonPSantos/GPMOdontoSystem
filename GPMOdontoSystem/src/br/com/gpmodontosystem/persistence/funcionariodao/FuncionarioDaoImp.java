@@ -6,10 +6,10 @@ import java.util.List;
 
 import br.com.gpmodontosystem.model.Cargo;
 import br.com.gpmodontosystem.model.Funcionario;
-import br.com.gpmodontosystem.persistence.dao.Dao;
+import br.com.gpmodontosystem.persistence.dao.DaoImpl;
 import br.com.gpmodontosystem.type.TypeSexo;
 
-public class FuncionarioDaoImp extends Dao implements IFuncionarioDao{
+public class FuncionarioDaoImp extends DaoImpl implements IFuncionarioDao{
 
 	@Override
 	public void inserir(Funcionario f) throws Exception {

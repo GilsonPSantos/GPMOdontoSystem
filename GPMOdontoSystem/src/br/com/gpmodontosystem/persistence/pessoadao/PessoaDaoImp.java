@@ -5,10 +5,10 @@ import java.sql.Statement;
 import java.util.Calendar;
 
 import br.com.gpmodontosystem.model.Pessoa;
-import br.com.gpmodontosystem.persistence.dao.Dao;
+import br.com.gpmodontosystem.persistence.dao.DaoImpl;
 import br.com.gpmodontosystem.type.TypeSexo;
 
-public class PessoaDaoImp extends Dao implements IPessoaDao {
+public class PessoaDaoImp extends DaoImpl implements IPessoaDao {
 	
 	java.sql.Date dataSql = null;
 	

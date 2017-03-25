@@ -3,10 +3,12 @@ package br.com.gpmodontosystem.manager;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
@@ -45,6 +47,9 @@ public class FuncionarioBean implements Serializable{
 	private String styleDisplayBtnFormEnderecoCadastrar;
 	private String styleDisplayBtnFormEnderecoAlterar;
 	
+	@ManagedProperty("#{msg}")
+	private ResourceBundle bundle;
+	
 	@PostConstruct
 	public void init(){
 		funcionarioService = new FuncionarioServiceImp();
@@ -65,15 +70,15 @@ public class FuncionarioBean implements Serializable{
 	
 	public void cadastrarFuncionario(){
 		FacesContext fc = FacesContext.getCurrentInstance();
-		try {//alterar a criação da tabela de funcionario para apontar a chave para a tabela pessoa
+		try {//alterar a criaï¿½ï¿½o da tabela de funcionario para apontar a chave para a tabela pessoa
 			funcionarioService.inserir(funcionario);
-			labelBtnModalEnd = "Adicionar Endereço";
+			labelBtnModalEnd = "Adicionar Endereï¿½o";
 			styleDisplayBtnFormFuncionarioCadastrar = "none";
 			styleDisplayBtnFormFuncionarioAlterar = "block";
-			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionário cadastrado com sucesso."));
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage(getBundle().getString("cadastro.inclusao.sucesso")));
 		} catch (Exception e) {
-			labelBtnModalEnd = "Adicionar Endereço";
-			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao cadastrar o Funcionário."));
+			labelBtnModalEnd = "Adicionar Endereï¿½o";
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage(getBundle().getString("cadastro.inclusao.error")));
 			e.printStackTrace();
 		}
 	}
@@ -82,7 +87,7 @@ public class FuncionarioBean implements Serializable{
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
 			funcionario = funcionarioService.consultarPeloId(funcionario);
-			labelBtnModalEnd = "Consultar Endereço";
+			labelBtnModalEnd = "Consultar Endereï¿½o";
 			styleDisplayBtnFormFuncionarioCadastrar = "none";
 			styleDisplayBtnFormFuncionarioAlterar = "block";
 			
@@ -90,10 +95,10 @@ public class FuncionarioBean implements Serializable{
 			styleDisplayBtnFormEnderecoAlterar = "block";
 			
 		} catch (Exception e) {
-			labelBtnModalEnd = "Adicionar Endereço";
+			labelBtnModalEnd = "Adicionar Endereï¿½o";
 			styleDisplayBtnFormFuncionarioCadastrar = "block";
 			styleDisplayBtnFormFuncionarioAlterar = "none";
-			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao consultar o Funcionário."));
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao consultar o Funcionï¿½rio."));
 			e.printStackTrace();
 		}
 	}
@@ -110,22 +115,22 @@ public class FuncionarioBean implements Serializable{
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
 			funcionarioService.alterar(funcionario);
-			labelBtnModalEnd = "Consultar Endereço";
+			labelBtnModalEnd = "Consultar Endereï¿½o";
 			styleDisplayBtnFormFuncionarioCadastrar = "none";
 			styleDisplayBtnFormFuncionarioAlterar = "block";
 			
 			styleDisplayBtnFormEnderecoCadastrar = "none";
 			styleDisplayBtnFormEnderecoAlterar = "block";
-			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionário alterado com sucesso."));
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionï¿½rio alterado com sucesso."));
 			
 		} catch (Exception e) {
-			labelBtnModalEnd = "Consultar Endereço";
+			labelBtnModalEnd = "Consultar Endereï¿½o";
 			styleDisplayBtnFormFuncionarioCadastrar = "none";
 			styleDisplayBtnFormFuncionarioAlterar = "block";
 			
 			styleDisplayBtnFormEnderecoCadastrar = "none";
 			styleDisplayBtnFormEnderecoAlterar = "block";
-			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao alterar o Funcionário."));
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao alterar o Funcionï¿½rio."));
 			e.printStackTrace();
 		}
 	}
@@ -140,13 +145,13 @@ public class FuncionarioBean implements Serializable{
 			flagCadastroEndereco = false;
 			styleDisplayBtnFormEnderecoCadastrar = "none";
 			styleDisplayBtnFormEnderecoAlterar = "block";
-			labelBtnModalEnd = "Consultar Endereço";
-			fc.addMessage("pgrowlBuscaCep", new FacesMessage("Endereço cadastrado com sucesso."));
+			labelBtnModalEnd = "Consultar Endereï¿½o";
+			fc.addMessage("pgrowlBuscaCep", new FacesMessage("Endereï¿½o cadastrado com sucesso."));
 		} catch (Exception e) {
 			styleDisplayBtnFormEnderecoCadastrar = "block";
 			styleDisplayBtnFormEnderecoAlterar = "none";
 			e.printStackTrace();
-			fc.addMessage("pgrowlBuscaCep", new FacesMessage("Ocorreu um erro interno ao cadastrar o endereço."));
+			fc.addMessage("pgrowlBuscaCep", new FacesMessage("Ocorreu um erro interno ao cadastrar o endereï¿½o."));
 		}
 	}
 	
@@ -158,14 +163,14 @@ public class FuncionarioBean implements Serializable{
 			
 			styleDisplayBtnFormEnderecoCadastrar = "none";
 			styleDisplayBtnFormEnderecoAlterar = "block";
-			labelBtnModalEnd = "Consultar Endereço";
-			fc.addMessage("pgrowlFormEnd", new FacesMessage("Endereço alterado com sucesso."));
+			labelBtnModalEnd = "Consultar Endereï¿½o";
+			fc.addMessage("pgrowlFormEnd", new FacesMessage("Endereï¿½o alterado com sucesso."));
 			
 		} catch (Exception e) {
 			styleDisplayBtnFormEnderecoCadastrar = "none";
 			styleDisplayBtnFormEnderecoAlterar = "block";
 			e.printStackTrace();
-			fc.addMessage("pgrowlFormEnd", new FacesMessage("Ocorreu um erro interno ao alterar o endereço."));
+			fc.addMessage("pgrowlFormEnd", new FacesMessage("Ocorreu um erro interno ao alterar o endereï¿½o."));
 		}
 	}
 	
@@ -175,11 +180,11 @@ public class FuncionarioBean implements Serializable{
 			enderecoService = new EnderecoServiceImpl();
 			enderecoService.deletar(funcionario);
 			funcionarioService.deletar(funcionario);
-			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionário excluído com sucesso."));
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Funcionï¿½rio excluï¿½do com sucesso."));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao excluir o Funcionário."));
+			fc.addMessage("pgrowFormFuncionario", new FacesMessage("Ocorreu um erro interno ao excluir o Funcionï¿½rio."));
 		}
 	}
 	
@@ -187,7 +192,7 @@ public class FuncionarioBean implements Serializable{
 		FacesContext fc = FacesContext.getCurrentInstance();
 		try {
 			if(!new BuscaCep().buscarCep(funcionario.getEndereco())){
-			fc.addMessage("pgrowlBuscaCep", new FacesMessage("CEP não localizado."));
+			fc.addMessage("pgrowlBuscaCep", new FacesMessage("CEP nï¿½o localizado."));
 			}
 		} catch (Exception e) {
 			fc.addMessage("pgrowlBuscaCep", new FacesMessage("Ocorreu um erro interno ao consultar o CEP."));
@@ -293,6 +298,14 @@ public class FuncionarioBean implements Serializable{
 
 	public void setListaCargo(List<Cargo> listaCargo) {
 		this.listaCargo = listaCargo;
+	}
+
+	public ResourceBundle getBundle() {
+		return bundle;
+	}
+
+	public void setBundle(ResourceBundle bundle) {
+		this.bundle = bundle;
 	}
 	
 	

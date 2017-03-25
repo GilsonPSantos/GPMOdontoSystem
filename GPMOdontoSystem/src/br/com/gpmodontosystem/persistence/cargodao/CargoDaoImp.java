@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.gpmodontosystem.model.Cargo;
-import br.com.gpmodontosystem.persistence.dao.Dao;
+import br.com.gpmodontosystem.persistence.dao.DaoImpl;
 
-public class CargoDaoImp extends Dao implements ICargoDao{
+public class CargoDaoImp extends DaoImpl implements ICargoDao{
 
 	@Override
 	public void inserir(Cargo c) throws Exception {

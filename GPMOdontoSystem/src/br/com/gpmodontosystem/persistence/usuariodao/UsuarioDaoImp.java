@@ -1,9 +1,9 @@
 package br.com.gpmodontosystem.persistence.usuariodao;
 
 import br.com.gpmodontosystem.model.Usuario;
-import br.com.gpmodontosystem.persistence.dao.Dao;
+import br.com.gpmodontosystem.persistence.dao.DaoImpl;
 
-public class UsuarioDaoImp extends Dao implements IUsuarioDao {
+public class UsuarioDaoImp extends DaoImpl implements IUsuarioDao {
 
 	@Override
 	public void inserir(Usuario u) throws Exception {

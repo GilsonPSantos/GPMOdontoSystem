@@ -5,14 +5,14 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.gpmodontosystem.model.Paciente;
-import br.com.gpmodontosystem.persistence.dao.Dao;
+import br.com.gpmodontosystem.persistence.dao.DaoImpl;
 
-public class PacienteDaoImp extends Dao implements IPacienteDao {
+public class PacienteDaoImp extends DaoImpl implements IPacienteDao {
 	
 	java.sql.Date dataSql = null;
 	
-//ver melhor esse método, pois paciente é uma pessoa e no final nem precisa dos atributos dele, basta uma classe sem
-	//ID pq o ID é da classe pessoa
+//ver melhor esse mï¿½todo, pois paciente ï¿½ uma pessoa e no final nem precisa dos atributos dele, basta uma classe sem
+	//ID pq o ID ï¿½ da classe pessoa
 	@Override
 	public void inserir(Paciente p) throws Exception {
 		open();

@@ -6,9 +6,9 @@ import java.util.Calendar;
 import java.util.List;
 
 import br.com.gpmodontosystem.model.Endereco;
-import br.com.gpmodontosystem.persistence.dao.Dao;
+import br.com.gpmodontosystem.persistence.dao.DaoImpl;
 
-public class EnderecoDaoImp extends Dao implements IEnderecoDao {
+public class EnderecoDaoImp extends DaoImpl implements IEnderecoDao {
 
 	java.sql.Date dataSql = null;
 	

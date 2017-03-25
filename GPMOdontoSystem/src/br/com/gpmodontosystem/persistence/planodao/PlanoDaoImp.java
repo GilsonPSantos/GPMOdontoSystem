@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.gpmodontosystem.model.Plano;
-import br.com.gpmodontosystem.persistence.dao.Dao;
+import br.com.gpmodontosystem.persistence.dao.DaoImpl;
 
-public class PlanoDaoImp extends Dao implements IPlanoDao {
+public class PlanoDaoImp extends DaoImpl implements IPlanoDao {
 
 	@Override
 	public void inserir(Plano p) throws Exception {
