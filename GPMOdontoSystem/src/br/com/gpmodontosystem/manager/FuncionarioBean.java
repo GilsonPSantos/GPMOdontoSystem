@@ -12,6 +12,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
+import org.apache.log4j.Logger;
+
 import br.com.gpmodontosystem.model.Cargo;
 import br.com.gpmodontosystem.model.Endereco;
 import br.com.gpmodontosystem.model.Funcionario;
@@ -28,6 +30,8 @@ import br.com.gpmodontosystem.utilitario.BuscaCep;
 @RequestScoped
 public class FuncionarioBean implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	private final static Logger logger = Logger.getLogger(FuncionarioBean.class);
 	
 	private Funcionario funcionario;
 	private List<Funcionario> listaFuncionario;
